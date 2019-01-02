@@ -61,7 +61,6 @@
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="PurchaseRobot" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
-      <Variable x:TypeArguments="ui:Browser" Name="newBrowser" />
       <Variable x:TypeArguments="x:String" Default="Please choose a file with companies information for further purchases search" Name="messageSelect" />
       <Variable x:TypeArguments="x:String" Name="inputFile" />
       <Variable x:TypeArguments="x:String" Default="http://zakupki.gov.ru/epz/orderplan/extendedsearch/search.html" Name="url" />
@@ -101,7 +100,7 @@
     <x:Reference>__ReferenceID1</x:Reference>
     <x:Reference>__ReferenceID2</x:Reference>
     <x:Reference>__ReferenceID3</x:Reference>
-    <sads:DebugSymbol.Symbol>d0RDOlxVc2Vyc1xrb2xvc1xPbmVEcml2ZVzQlNC+0LrRg9C80LXQvdGC0YtcVWlQYXRoXFB1cmNoYXNlXE1haW4ueGFtbA8+A2kPAgEBQTRBggECAQNDNEN0AgECSAlIzQECARNLDUunAQIBEE4RUykCAQpWFVstAgEESKoBSLsBAgEUS5cBS6QBAgERUUxRWQIBDlBNUFgCAQxOwgFO0wECAQtYTFhRAgEIWVZZYwIBBlbKAVbeAQIBBQ==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d0RDOlxVc2Vyc1xrb2xvc1xPbmVEcml2ZVzQlNC+0LrRg9C80LXQvdGC0YtcVWlQYXRoXFB1cmNoYXNlXE1haW4ueGFtbA8+A2gPAgEBQDRAggECAQNCNEJ0AgECRwlHzQECARNKDUqnAQIBEE0RUikCAQpVFVotAgEER6oBR7sBAgEUSpcBSqQBAgERUExQWQIBDk9NT1gCAQxNwgFN0wECAQtXTFdRAgEIWFZYYwIBBlXKAVXeAQIBBQ==</sads:DebugSymbol.Symbol>
   </Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -126,7 +125,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314,87">
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>

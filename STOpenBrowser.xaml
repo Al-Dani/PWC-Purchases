@@ -108,7 +108,7 @@
                         </ui:Click>
                       </If.Then>
                     </If>
-                    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into &quot;Input customer&quot;" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="True" Text="[row(1).ToString]">
+                    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" Activate="True" ClickBeforeTyping="False" DelayMS="5000" DisplayName="Type Into &quot;Input customer&quot;" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="True" Text="[row(1).ToString]">
                       <ui:TypeInto.Target>
                         <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;webctrl id='customer' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
                       </ui:TypeInto.Target>
@@ -128,7 +128,7 @@
                         <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;webctrl id='ui-active-menuitem' tag='A' /&gt;" WaitForReady="COMPLETE" />
                       </ui:Click.Target>
                     </ui:Click>
-                    <ui:Click DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DelayBefore="3" DisplayName="Click &quot;Search&quot;" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                    <ui:Click DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DelayBefore="500" DisplayName="Click &quot;Search&quot;" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
                       <ui:Click.CursorPosition>
                         <ui:CursorPosition Position="Center">
                           <ui:CursorPosition.OffsetX>
@@ -159,7 +159,7 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>d01DOlxVc2Vyc1xrb2xvc1xPbmVEcml2ZVzQlNC+0LrRg9C80LXQvdGC0YtcVWlQYXRoXFB1cmNoYXNlXFNUT3BlbkJyb3dzZXIueGFtbBhKA6MBDgIBAUsFoQEWAgECS7sBS8IBAgEcUQueARYCAQNTO1M+AgEEVQ2dAR0CAQVVPlVLAgEaWxOaAR4CAQZcFW4aAgEUbxVzIwIBEXQVggEgAgEPgwEVkQEgAgEMkgEVmQEeAgEHXCNcPAIBFV4ZbCQCARdxb3GcAQIBE2+5Am/MAgIBEoABb4ABogECARCPAW+PAb4BAgEOgwFXgwFaAgENlwE/lwFPAgEKlAFAlAFMAgEIanNqxQECARleW15fAgEY</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d01DOlxVc2Vyc1xrb2xvc1xPbmVEcml2ZVzQlNC+0LrRg9C80LXQvdGC0YtcVWlQYXRoXFB1cmNoYXNlXFNUT3BlbkJyb3dzZXIueGFtbBlKA6MBDgIBAUsFoQEWAgECS7sBS8IBAgEdUQueARYCAQNTO1M+AgEEVQ2dAR0CAQVVPlVLAgEbWxOaAR4CAQZcFW4aAgEVbxVzIwIBEXQVggEgAgEPgwEVkQEgAgEMkgEVmQEeAgEHXCNcPAIBFl4ZbCQCARhxb3GcAQIBFG+HAW+NAQIBE2+1Am/IAgIBEoABb4ABogECARCPAW+PAb4BAgEOgwFXgwFcAgENlwE/lwFPAgEKlAFAlAFMAgEIanNqxQECARpeW15fAgEZ</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
