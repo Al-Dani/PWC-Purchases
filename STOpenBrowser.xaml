@@ -68,7 +68,6 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="STOpenBrowser" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -113,19 +112,12 @@
                         <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;webctrl id='customer' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
                       </ui:TypeInto.Target>
                     </ui:TypeInto>
-                    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click &quot;active ui item&quot;" sap2010:WorkflowViewState.IdRef="Click_16" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click on company name" sap2010:WorkflowViewState.IdRef="Click_18" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
                       <ui:Click.CursorPosition>
-                        <ui:CursorPosition Position="Center">
-                          <ui:CursorPosition.OffsetX>
-                            <InArgument x:TypeArguments="x:Int32" />
-                          </ui:CursorPosition.OffsetX>
-                          <ui:CursorPosition.OffsetY>
-                            <InArgument x:TypeArguments="x:Int32" />
-                          </ui:CursorPosition.OffsetY>
-                        </ui:CursorPosition>
+                        <ui:CursorPosition OffsetX="602" OffsetY="34" Position="TopLeft" />
                       </ui:Click.CursorPosition>
                       <ui:Click.Target>
-                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;webctrl id='ui-active-menuitem' tag='A' /&gt;" WaitForReady="COMPLETE" />
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="fd5fce581bf0c4af471ec55d23b6036a" Selector="&lt;webctrl id='ui-id-7' tag='A' /&gt;" WaitForReady="COMPLETE" />
                       </ui:Click.Target>
                     </ui:Click>
                     <ui:Click DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DelayBefore="500" DisplayName="Click &quot;Search&quot;" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -159,17 +151,17 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>d01DOlxVc2Vyc1xrb2xvc1xPbmVEcml2ZVzQlNC+0LrRg9C80LXQvdGC0YtcVWlQYXRoXFB1cmNoYXNlXFNUT3BlbkJyb3dzZXIueGFtbBlKA6MBDgIBAUsFoQEWAgECS7sBS8IBAgEdUQueARYCAQNTO1M+AgEEVQ2dAR0CAQVVPlVLAgEbWxOaAR4CAQZcFW4aAgEVbxVzIwIBEXQVggEgAgEPgwEVkQEgAgEMkgEVmQEeAgEHXCNcPAIBFl4ZbCQCARhxb3GcAQIBFG+HAW+NAQIBE2+1Am/IAgIBEoABb4ABogECARCPAW+PAb4BAgEOgwFXgwFcAgENlwE/lwFPAgEKlAFAlAFMAgEIanNqxQECARpeW15fAgEZ</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzxcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVE9wZW5Ccm93c2VyLnhhbWwbSQObAQ4CAQFKBZkBFgIBAkq7AUrCAQIBH1ALlgEWAgEDUjtSPgIBBFQNlQEdAgEFVD5USwIBHVoTkgEeAgEGWxVtGgIBF24VciMCARNzFXogAgEPexWJASACAQyKARWRAR4CAQdbI1s8AgEYXRlrJAIBGnBvcJwBAgEWbocBbo0BAgEVbrUCbsgCAgEUeKgBeNABAgESdUJ1RgIBEXU0dTkCARCHAW+HAb4BAgEOe1d7XAIBDY8BP48BTwIBCowBQIwBTAIBCGlzacUBAgEcXVtdXwIBGw==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="Click_13" sap:VirtualizedContainerService.HintSize="314,68" />
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="505,216" />
-      <sap2010:ViewStateData Id="TypeInto_2" sap:VirtualizedContainerService.HintSize="505,96" />
-      <sap2010:ViewStateData Id="Click_16" sap:VirtualizedContainerService.HintSize="505,68" />
-      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="505,68" />
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="505,60" />
-      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="527,792">
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,218" />
+      <sap2010:ViewStateData Id="TypeInto_2" sap:VirtualizedContainerService.HintSize="464,96" />
+      <sap2010:ViewStateData Id="Click_18" sap:VirtualizedContainerService.HintSize="464,106" />
+      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="464,68" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="200,52">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -177,23 +169,23 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="287,207" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="309,331">
+      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="286.5,208" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="308.5,332">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="OpenBrowser_1" sap:VirtualizedContainerService.HintSize="414,430" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,554">
+      <sap2010:ViewStateData Id="OpenBrowser_1" sap:VirtualizedContainerService.HintSize="414,431" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,555">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="STOpenBrowser_1" sap:VirtualizedContainerService.HintSize="476,634" />
+      <sap2010:ViewStateData Id="STOpenBrowser_1" sap:VirtualizedContainerService.HintSize="476,635" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
