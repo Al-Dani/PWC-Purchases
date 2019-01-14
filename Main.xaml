@@ -82,15 +82,14 @@
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
                 <FlowStep.Next>
-                  <FlowStep x:Name="__ReferenceID4">
-                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" Text="[messageBrowserClose]" TopMost="True" sap2010:WorkflowViewState.IdRef="MessageBox_2" />
+                  <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_7">
+                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[messageBrowserClose]" TopMost="True" />
                     <FlowStep.Next>
-                      <FlowStep x:Name="__ReferenceID5">
-                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ACloseBrowserWindows workflow" UnSafe="False" WorkflowFileName="ACloseBrowserWindows.xaml">
+                      <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_6">
+                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ACloseBrowserWindows workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ACloseBrowserWindows.xaml">
                           <ui:InvokeWorkflowFile.Arguments>
                             <scg:Dictionary x:TypeArguments="x:String, Argument" />
                           </ui:InvokeWorkflowFile.Arguments>
-                          <sap2010:WorkflowViewState.IdRef>InvokeWorkflowFile_3</sap2010:WorkflowViewState.IdRef>
                         </ui:InvokeWorkflowFile>
                         <FlowStep.Next>
                           <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_5">
@@ -102,10 +101,8 @@
                             </ui:InvokeWorkflowFile>
                           </FlowStep>
                         </FlowStep.Next>
-                        <sap2010:WorkflowViewState.IdRef>FlowStep_6</sap2010:WorkflowViewState.IdRef>
                       </FlowStep>
                     </FlowStep.Next>
-                    <sap2010:WorkflowViewState.IdRef>FlowStep_7</sap2010:WorkflowViewState.IdRef>
                   </FlowStep>
                 </FlowStep.Next>
               </FlowStep>
@@ -120,7 +117,7 @@
     <x:Reference>__ReferenceID3</x:Reference>
     <x:Reference>__ReferenceID4</x:Reference>
     <x:Reference>__ReferenceID5</x:Reference>
-    <sads:DebugSymbol.Symbol>dzNcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xNYWluLnhhbWwUPgN8DwIBAUA0QIIBAgEEQjRCdAIBA0Q0RHACAQJICUjNAQIBGUsNS6cBAgEWThFTKQIBEFYVVtMBAgENWRleMQIBC2EdZjUCAQVIqgFIuwECARpLlwFLpAECARdRTFFZAgEUUE1QWAIBEk7CAU7TAQIBEVZ7VpIBAgEOWZ4BWbkBAgEMY1RjWQIBCWReZGsCAQdh0gFh5gECAQY=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzNcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xNYWluLnhhbWwUPgN5DwIBAUA0QIIBAgEEQjRCdAIBA0Q0RHACAQJICUjNAQIBGUsNS6cBAgEWThFTKQIBEFYVVtMBAgENWRldMQIBC2AdZTUCAQVIqgFIuwECARpLlwFLpAECARdRTFFZAgEUUE1QWAIBEk7CAU7TAQIBEVaqAVbBAQIBDlnVAVnwAQIBDGJUYlkCAQljXmNrAgEHYNIBYOYBAgEG</sads:DebugSymbol.Symbol>
   </Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -219,18 +216,18 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="614,769">
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="614,1062">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
             <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
             <av:Size x:Key="ShapeSize">60,75</av:Size>
             <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,114.5</av:PointCollection>
-            <x:Double x:Key="Height">732.83199999999988</x:Double>
+            <x:Double x:Key="Height">1026</x:Double>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="654,889" />
+      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="654,1142" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
