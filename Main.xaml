@@ -96,9 +96,19 @@
                             <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke STOpenBrowser workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="STOpenBrowser.xaml">
                               <ui:InvokeWorkflowFile.Arguments>
                                 <InArgument x:TypeArguments="x:String" x:Key="url">[url]</InArgument>
-                                <InArgument x:TypeArguments="sd:DataTable" x:Key="dataTable">[companiesDT]</InArgument>
+                                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dataTable">[companiesDT]</InOutArgument>
                               </ui:InvokeWorkflowFile.Arguments>
                             </ui:InvokeWorkflowFile>
+                            <FlowStep.Next>
+                              <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_8">
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke STWriteFile workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="STWriteFile.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="sd:DataTable" x:Key="dataTable">[companiesDT]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="originFile">[inputFile]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </FlowStep>
+                            </FlowStep.Next>
                           </FlowStep>
                         </FlowStep.Next>
                       </FlowStep>
@@ -117,7 +127,8 @@
     <x:Reference>__ReferenceID3</x:Reference>
     <x:Reference>__ReferenceID4</x:Reference>
     <x:Reference>__ReferenceID5</x:Reference>
-    <sads:DebugSymbol.Symbol>dzNcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xNYWluLnhhbWwUPgN5DwIBAUA0QIIBAgEEQjRCdAIBA0Q0RHACAQJICUjNAQIBGUsNS6cBAgEWThFTKQIBEFYVVtMBAgENWRldMQIBC2AdZTUCAQVIqgFIuwECARpLlwFLpAECARdRTFFZAgEUUE1QWAIBEk7CAU7TAQIBEVaqAVbBAQIBDlnVAVnwAQIBDGJUYlkCAQljXmNrAgEHYNIBYOYBAgEG</sads:DebugSymbol.Symbol>
+    <x:Reference>__ReferenceID6</x:Reference>
+    <sads:DebugSymbol.Symbol>dzNcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xNYWluLnhhbWwYPgOEAQ8CAQFANECCAQIBBEI0QnQCAQNENERwAgECSAlIzQECAR9LDUunAQIBHE4RUykCARZWFVbTAQIBE1kZXTECARFgHWU1AgELaCFtOQIBBUiqAUi7AQIBIEuXAUukAQIBHVFMUVkCARpQTVBYAgEYTsIBTtMBAgEXVqoBVsEBAgEUWdUBWfABAgESYlRiWQIBD2NhY24CAQ1g0gFg5gECAQxqYmpvAgEJa19ragIBB2jUAWjmAQIBBg==</sads:DebugSymbol.Symbol>
   </Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -163,11 +174,27 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="200,52">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,676</av:Point>
+            <av:Size x:Key="ShapeSize">200,52</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_5">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">200,574</av:Point>
             <av:Size x:Key="ShapeSize">200,52</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,626 300,676</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
