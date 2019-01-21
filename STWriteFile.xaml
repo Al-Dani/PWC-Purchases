@@ -67,8 +67,8 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="STWriteFile" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -143,7 +143,7 @@
                     <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Status" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_4" SheetName="Параметры" Text="[status]" />
                     <If Condition="[row(4).Equals(True)]" sap2010:WorkflowViewState.IdRef="If_3">
                       <If.Then>
-                        <Sequence>
+                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
                           <Assign sap2010:WorkflowViewState.IdRef="Assign_9">
                             <Assign.To>
                               <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
@@ -152,8 +152,7 @@
                               <InArgument x:TypeArguments="x:String">["F" + currentRow.ToString]</InArgument>
                             </Assign.Value>
                           </Assign>
-                          <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Status" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_5" SheetName="Параметры" Text="[href]" />
-                          <sap2010:WorkflowViewState.IdRef>Sequence_6</sap2010:WorkflowViewState.IdRef>
+                          <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Status" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_5" SheetName="Параметры" Text="[row(5).ToString]" />
                         </Sequence>
                       </If.Then>
                     </If>
@@ -174,7 +173,7 @@
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
     </ui:ExcelApplicationScope>
-    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sOUoDsgEOAgEBTDRMVgIBAk4FTrABAgFETwWwASACAQNOIk4oAgFITjVOQgIBR06fAU6tAQIBRU+gAU+tAQIBQ1ULrQEWAgEEWg1ayAECAT9bDVucAQIBO1wNXJwBAgE3XQ1kFgIBM2UNqwEdAgEGrAENrAF3AgEFWqwBWq8BAgFCWp8BWqIBAgFBWroBWsUBAgFAWyVbKQIBPluRAVuZAQIBPVuAAVuLAQIBPFwlXCkCATpckQFcmQECATlcgAFciwECAThiN2I4AgE2XzhfRAIBNGU+ZUsCATFrE6gBHgIBB28Vdh4CASx3FY4BGgIBIY8BFY8BtwECARuQARWfARoCAQ2gARWnAR4CAQh0QHRbAgEvcUFxTQIBLXcjdzoCASJ5GYIBJAIBJ4UBGYwBIgIBI48BLY8BOwIBH48BqgGPAbQBAgEdjwGZAY8BpAECARyQASOQAToCAQ6SARmdASQCAQ+lAT+lAU8CAQuiAUCiAUwCAQl6G4EBJAIBKIoBRIoBRwIBJocBRYcBTQIBJJMBG5oBJAIBFpsBG5sBuwECARB/Rn9IAgErfEd8TwIBKZgBRpgBYQIBGZUBR5UBUwIBF5sBM5sBQQIBFJsBsAGbAbgBAgESmwGfAZsBqgECARE=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sOUoDsQEOAgEBTDRMVgIBAk4FTrABAgFDTwWvASACAQNOIk4oAgFHTjVOQgIBRk6fAU6tAQIBRE+gAU+tAQIBQlULrAEWAgEEWg1ayAECAT5bDVucAQIBOlwNXJwBAgE2XQ1kFgIBMmUNqgEdAgEGqwENqwF3AgEFWqwBWq8BAgFBWp8BWqIBAgFAWroBWsUBAgE/WyVbKQIBPVuRAVuZAQIBPFuAAVuLAQIBO1wlXCkCATlckQFcmQECAThcgAFciwECATdiN2I4AgE1XzhfRAIBM2U+ZUsCATBrE6cBHgIBB28Vdh4CASt3FY4BGgIBII8BFY8BtwECARqQARWeARoCAQ2fARWmAR4CAQh0QHRbAgEucUFxTQIBLHcjdzoCASF5GYIBJAIBJoUBGYwBIgIBIo8BLY8BOwIBHo8BqgGPAbQBAgEcjwGZAY8BpAECARuQASOQAToCAQ6SARmcASQCAQ+kAT+kAU8CAQuhAUChAUwCAQl6G4EBJAIBJ4oBRIoBRwIBJYcBRYcBTQIBI5MBG5oBJAIBFZsBG5sBxgECARB/Rn9IAgEqfEd8TwIBKJgBRpgBYQIBGJUBR5UBUwIBFpsBM5sBQQIBE5sBsAGbAcMBAgESmwGfAZsBqgECARE=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -237,7 +236,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="STWriteFile_1" sap:VirtualizedContainerService.HintSize="476,902" />
+      <sap2010:ViewStateData Id="STWriteFile_1" sap:VirtualizedContainerService.HintSize="476,1029" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

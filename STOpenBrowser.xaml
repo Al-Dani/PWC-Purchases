@@ -76,6 +76,7 @@
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="STOpenBrowser" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <ui:AddDataColumn x:TypeArguments="x:Object" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="Статус" DataTable="[dataTable]" DisplayName="Add Data Column Status" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" MaxLength="100" Unique="False" />
+    <ui:AddDataColumn x:TypeArguments="x:Object" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="Ссылка" DataTable="[dataTable]" DisplayName="Add Data Column Href" MaxLength="100" Unique="False" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
     <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Open Browser" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" NewSession="True" Private="False" Url="[url]">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -99,6 +100,7 @@
                       <Variable x:TypeArguments="x:Boolean" Default="True" Name="hasFound" />
                       <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="elChildren" />
                       <Variable x:TypeArguments="x:String" Name="parsedDate" />
+                      <Variable x:TypeArguments="x:String" Name="href" />
                     </Sequence.Variables>
                     <If Condition="[rowCounter &lt;&gt; 1]" sap2010:WorkflowViewState.IdRef="If_1">
                       <If.Then>
@@ -138,7 +140,7 @@
                           <Sequence.Variables>
                             <Variable x:TypeArguments="s:DateTime" Name="finishDate" />
                           </Sequence.Variables>
-                          <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim temp As String() = Split(inputStr,&quot;/&quot;)&#xD;&#xA;Dim sb As New System.Text.StringBuilder()&#xD;&#xA;Dim str As String = sb.Append(temp(1)).Append(&quot;/&quot;).Append(temp(0)).Append(&quot;/&quot;).Append(temp(2)).ToString&#xD;&#xA;Dim another As String() = Split(str, &quot; &quot;)&#xD;&#xA;result = another(0)" DisplayName="Parse date" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+                          <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim temp As String() = Split(inputStr,&quot;/&quot;)&#xA;Dim sb As New System.Text.StringBuilder()&#xA;Dim str As String = sb.Append(temp(1)).Append(&quot;/&quot;).Append(temp(0)).Append(&quot;/&quot;).Append(temp(2)).ToString&#xA;Dim another As String() = Split(str, &quot; &quot;)&#xA;result = another(0)" DisplayName="Parse date" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
                             <ui:InvokeCode.Arguments>
                               <InArgument x:TypeArguments="x:String" x:Key="inputStr">[row(2).ToString]</InArgument>
                               <OutArgument x:TypeArguments="x:String" x:Key="result">[parsedDate]</OutArgument>
@@ -231,9 +233,18 @@
                                       <InArgument x:TypeArguments="x:Boolean">False</InArgument>
                                     </Assign.Value>
                                   </Assign>
-                                  <ui:Break sap2010:WorkflowViewState.IdRef="Break_1" />
                                 </Sequence>
                               </If.Then>
+                              <If.Else>
+                                <ui:InjectJsScript InputParameter="{x:Null}" DisplayName="Inject Js Script" sap2010:WorkflowViewState.IdRef="InjectJsScript_1" ScriptCode="&#xD;&#xA;function f()&#xD;&#xA;{&#xD;&#xA;return window.location.href;&#xD;&#xA;}&#xD;&#xA;">
+                                  <ui:InjectJsScript.ScriptOutput>
+                                    <OutArgument x:TypeArguments="x:String">[href]</OutArgument>
+                                  </ui:InjectJsScript.ScriptOutput>
+                                  <ui:InjectJsScript.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                                  </ui:InjectJsScript.Target>
+                                </ui:InjectJsScript>
+                              </If.Else>
                             </If>
                           </Sequence>
                         </ActivityAction>
@@ -247,6 +258,14 @@
                         <InArgument x:TypeArguments="x:Object">[hasFound]</InArgument>
                       </Assign.Value>
                     </Assign>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[row(5)]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">[href]</InArgument>
+                      </Assign.Value>
+                    </Assign>
                   </Sequence>
                 </ActivityAction>
               </ui:ForEachRow.Body>
@@ -255,15 +274,16 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dzxcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVE9wZW5Ccm93c2VyLnhhbWxMTQODAg4CAQFOBU6rAgIBWk8FgQIWAgECTpABTpgBAgFdTqMBTrABAgFbT7sBT8IBAgFYVQv+ARYCAQNXO1c+AgEEWQ39AR0CAQVZPllLAgFWXxP6AR4CAQZjRWNLAgEHZxV5GgIBUHoVfiMCAUx/FYYBIAIBSIcBFZoBGgIBPJsBFasBGgIBMKwBFboBIAIBLbsBFcIBHgIBKMMBFccBLgIBI8gBFcwBJwIBHs0BFfEBIgIBDPIBFfkBHgIBCGcjZzwCAVFpGXckAgFTfG98nAECAU96hwF6jQECAU56tQJ6yAICAU2EAagBhAHQAQIBS4EBQoEBRgIBSoEBNIEBOQIBSYcBI4cBTAIBPYkBGZgBJAIBPpsBI5sBTAIBMZ0BGakBJAIBMrgBb7gBvgECAS+sAVesAVwCAS7AAT/AAU8CASu9AUC9AUwCASnDAWzDAXcCASbFAW/FAa8BAgElwwE9wwFDAgEkyAFhyAF0AgEiygFvygF6AgEgyAEvyAE9AgEfzQGkAc0BsgECAR3TARvuASYCAQ33AUD3AUoCAQr0AUH0AUkCAQl1c3XFAQIBVWlbaV8CAVSNARuSASsCAUSTARuXASkCAT+eARujASsCATikARuoASkCATPXAR3eAS8CARffAR3tASICAQ6QAVaQAWICAUaPAVePAWgCAUWVAXWVAasBAgFDkwG0ApMBwgICAUGTAY0BkwGTAQIBQKEBVqEBYgIBOqABV6ABaAIBOaYBdaYBqQECATekAbICpAHAAgIBNaQBjQGkAZMBAgE01wFT1wFbAgEa2QFJ2QFTAgEY3AF33AF/AgEb3wEr3wFmAgEP4QEh6wEsAgER4gEj6QEsAgET6gEj6gFZAgES5wFP5wFUAgEW5AFQ5AFaAgEU</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzxcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVE9wZW5Ccm93c2VyLnhhbWxUTQOWAg4CAQFOBU6rAgIBZU8FT6kCAgFhUAWUAhYCAQJOkAFOmAECAWhOowFOsAECAWZPkAFPmAECAWRPowFPsAECAWJQuwFQwgECAV9WC5ECFgIBA1g7WD4CAQRaDZACHQIBBVo+WksCAV1gE40CHgIBBmRFZEsCAQdpFXsaAgFXfBWAASMCAVOBARWIASACAU+JARWcARoCAUOdARWtARoCATeuARW8ASACATS9ARXEAR4CAS/FARXJAS4CASrKARXOAScCASXPARX8ASICARD9ARWEAh4CAQyFAhWMAh4CAQhpI2k8AgFYaxl5JAIBWn5vfpwBAgFWfIcBfI0BAgFVfLUCfMgCAgFUhgGoAYYB0AECAVKDAUKDAUYCAVGDATSDATkCAVCJASOJAUwCAUSLARmaASQCAUWdASOdAUwCATifARmrASQCATm6AW+6Ab4BAgE2rgFXrgFcAgE1wgE/wgFPAgEyvwFAvwFMAgEwxQFsxQF3AgEtxwFvxwGvAQIBLMUBPcUBQwIBK8oBYcoBdAIBKcwBb8wBegIBJ8oBL8oBPQIBJs8BpAHPAbIBAgEk1QEb+QEmAgERggJAggJKAgEO/wFB/wFJAgENigJAigJGAgEKhwJBhwJJAgEJd3N3xQECAVxrW2tfAgFbjwEblAErAgFLlQEbmQEpAgFGoAEbpQErAgE/pgEbqgEpAgE62QEd4AEvAgEe4QEd+AEiAgESkgFWkgFiAgFNkQFXkQFoAgFMlwF1lwGrAQIBSpUBtAKVAcICAgFIlQGNAZUBkwECAUejAVajAWICAUGiAVeiAWgCAUCoAXWoAakBAgE+pgGyAqYBwAICATymAY0BpgGTAQIBO9kBU9kBWwIBIdsBSdsBUwIBH94Bd94BfwIBIuEBK+EBZgIBE+MBIewBLAIBGe8BIfYBNQIBFeQBI+sBLAIBGvEBTfEBUwIBF+8BqwHvAYkCAgEW6QFP6QFUAgEd5gFQ5gFaAgEb</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="AddDataColumn`1_1" sap:VirtualizedContainerService.HintSize="414,22" />
+      <sap2010:ViewStateData Id="AddDataColumn`1_2" sap:VirtualizedContainerService.HintSize="414,22" />
       <sap2010:ViewStateData Id="Click_13" sap:VirtualizedContainerService.HintSize="314,68" />
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="525.5,218" />
-      <sap2010:ViewStateData Id="TypeInto_2" sap:VirtualizedContainerService.HintSize="525.5,96" />
-      <sap2010:ViewStateData Id="Click_18" sap:VirtualizedContainerService.HintSize="525.5,106" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="641,218" />
+      <sap2010:ViewStateData Id="TypeInto_2" sap:VirtualizedContainerService.HintSize="641,96" />
+      <sap2010:ViewStateData Id="Click_18" sap:VirtualizedContainerService.HintSize="641,106" />
       <sap2010:ViewStateData Id="InvokeCode_1" sap:VirtualizedContainerService.HintSize="314,164" />
       <sap2010:ViewStateData Id="TypeInto_4" sap:VirtualizedContainerService.HintSize="314,96" />
       <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="336,424">
@@ -273,7 +293,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="525.5,574" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="641,574" />
       <sap2010:ViewStateData Id="InvokeCode_3" sap:VirtualizedContainerService.HintSize="314,164" />
       <sap2010:ViewStateData Id="TypeInto_7" sap:VirtualizedContainerService.HintSize="314,96" />
       <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="336,424">
@@ -283,31 +303,32 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="525.5,574" />
-      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="525.5,68" />
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="525.5,60" />
-      <sap2010:ViewStateData Id="WaitUiElementAppear_1" sap:VirtualizedContainerService.HintSize="525.5,68" />
-      <sap2010:ViewStateData Id="FindChildren_1" sap:VirtualizedContainerService.HintSize="525.5,68" />
-      <sap2010:ViewStateData Id="GetAttribute_2" sap:VirtualizedContainerService.HintSize="464,96" />
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="641,574" />
+      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="641,68" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="641,60" />
+      <sap2010:ViewStateData Id="WaitUiElementAppear_1" sap:VirtualizedContainerService.HintSize="641,68" />
+      <sap2010:ViewStateData Id="FindChildren_1" sap:VirtualizedContainerService.HintSize="641,68" />
+      <sap2010:ViewStateData Id="GetAttribute_2" sap:VirtualizedContainerService.HintSize="603,96" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Break_1" sap:VirtualizedContainerService.HintSize="242,22" />
-      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="264,246">
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="264,184">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="464,396" />
-      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="486,656">
+      <sap2010:ViewStateData Id="InjectJsScript_1" sap:VirtualizedContainerService.HintSize="314,96" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="603,334" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="625,594">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="525.5,791" />
-      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="525.5,60" />
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="641,729" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="641,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="641,60" />
       <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="248,52">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -325,14 +346,14 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="OpenBrowser_1" sap:VirtualizedContainerService.HintSize="414,431" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,617">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,679">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="STOpenBrowser_1" sap:VirtualizedContainerService.HintSize="476,697" />
+      <sap2010:ViewStateData Id="STOpenBrowser_1" sap:VirtualizedContainerService.HintSize="476,759" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
