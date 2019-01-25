@@ -75,11 +75,12 @@
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="тут должна быть поисковая строка" Name="href" />
       <Variable x:TypeArguments="x:String" Name="destinationFolder" />
+      <Variable x:TypeArguments="x:String" Default="Purchase requests result.xlsx" Name="resultFile" />
     </Sequence.Variables>
     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="Пожалуйста, выберите папку для сохранения результата" TopMost="True" />
     <ui:SelectFolder DisplayName="Select Folder" sap2010:WorkflowViewState.IdRef="SelectFolder_1" SelectedFolder="[destinationFolder]" />
-    <ui:CopyFile ContinueOnError="True" Destination="[destinationFolder + &quot;/result.xlsx&quot;]" DisplayName="Copy File" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[originFile]" />
-    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="[destinationFolder + &quot;/result.xlsx&quot;]">
+    <ui:CopyFile ContinueOnError="True" Destination="[destinationFolder + &quot;/&quot; + resultFile]" DisplayName="Copy File" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[originFile]" />
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="[destinationFolder + &quot;/&quot; + resultFile]">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
@@ -183,17 +184,17 @@
     </ui:ExcelApplicationScope>
     <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start Process" FileName="[destinationFolder + &quot;/result.xlsx&quot;]" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="Обработка успешно завершена" TopMost="True" />
-    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sTkoDuwEOAgEBTDRMVgIBAk8FT+IBAgFhUAVQigECAV5RBVHSAQIBWFIFtwEgAgEIuAEFuAHQAQIBBbkBBbkByQECAQNPmgFP0AECAWJQclCHAQIBX1EiUSgCAV1RNVFlAgFbUcEBUc8BAgFZUqABUtABAgFWWAu0ARYCAQm4AWy4AZwBAgEGuQGaAbkBtwECAQRdDV3IAQIBUl4NXsYBAgFOXw1fnAECAUpgDWCcAQIBRmENaBYCAUJpDbIBHQIBC7MBDbMBdwIBCl2sAV2vAQIBVV2fAV2iAQIBVF26AV3FAQIBU16qAV6tAQIBUV6dAV6gAQIBUF64AV7DAQIBT18lXykCAU1fkQFfmQECAUxfgAFfiwECAUtgJWApAgFJYJEBYJkBAgFIYIABYIsBAgFHZjdmOAIBRWM4Y0QCAUNpPmlLAgFAbxOvAR4CAQxzFXoeAgE7exWWARoCASWXARWXAbcBAgEfmAEVpgEaAgESpwEVrgEeAgENeEB4WwIBPnVBdU0CATx7I3s6AgEmfRmHASQCATGKARmUASQCASeXAS2XATsCASOXAaoBlwG0AQIBIZcBmQGXAaQBAgEgmAEjmAE6AgETmgEZpAEkAgEUrAE/rAFPAgEQqQFAqQFMAgEOfhuFASQCATeGARuGAdcBAgEyiwEbkgEkAgEtkwEbkwHZAQIBKJsBG6IBJAIBGqMBG6MBxgECARWDAUaDAUgCATqAAUeAAU8CATiGATiGAVQCATaGAbABhgG+AQIBNIYByQGGAdQBAgEzkAFGkAFJAgEwjQFHjQFPAgEukwE4kwFWAgEskwGyAZMBwAECASqTAcsBkwHWAQIBKaABRqABYQIBHZ0BR50BUwIBG6MBM6MBQQIBGKMBsAGjAcMBAgEXowGfAaMBqgECARY=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sT0oDvAEOAgEBTDRMVgIBA040TlMCAQJQBVDiAQIBZFEFUYoBAgFhUgVS1AECAVpTBbgBIAIBCbkBBbkB0AECAQa6AQW6AckBAgEEUJoBUNABAgFlUXJRhwECAWJSIlIoAgFgUjVSZwIBXVLDAVLRAQIBW1OgAVPSAQIBV1kLtQEWAgEKuQFsuQGcAQIBB7oBmgG6AbcBAgEFXg1eyAECAVNfDV/GAQIBT2ANYJwBAgFLYQ1hnAECAUdiDWkWAgFDag2zAR0CAQy0AQ20AXcCAQterAFerwECAVZenwFeogECAVVeugFexQECAVRfqgFfrQECAVJfnQFfoAECAVFfuAFfwwECAVBgJWApAgFOYJEBYJkBAgFNYIABYIsBAgFMYSVhKQIBSmGRAWGZAQIBSWGAAWGLAQIBSGc3ZzgCAUZkOGREAgFEaj5qSwIBQXATsAEeAgENdBV7HgIBPHwVlwEaAgEmmAEVmAG3AQIBIJkBFacBGgIBE6gBFa8BHgIBDnlAeVsCAT92QXZNAgE9fCN8OgIBJ34ZiAEkAgEyiwEZlQEkAgEomAEtmAE7AgEkmAGqAZgBtAECASKYAZkBmAGkAQIBIZkBI5kBOgIBFJsBGaUBJAIBFa0BP60BTwIBEaoBQKoBTAIBD38bhgEkAgE4hwEbhwHXAQIBM4wBG5MBJAIBLpQBG5QB2QECASmcARujASQCARukARukAcYBAgEWhAFGhAFIAgE7gQFHgQFPAgE5hwE4hwFUAgE3hwGwAYcBvgECATWHAckBhwHUAQIBNJEBRpEBSQIBMY4BR44BTwIBL5QBOJQBVgIBLZQBsgGUAcABAgErlAHLAZQB1gECASqhAUahAWECAR6eAUeeAVMCARykATOkAUECARmkAbABpAHDAQIBGKQBnwGkAaoBAgEX</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="MessageBox_1" sap:VirtualizedContainerService.HintSize="414,59" />
-      <sap2010:ViewStateData Id="SelectFolder_1" sap:VirtualizedContainerService.HintSize="414,22" />
-      <sap2010:ViewStateData Id="CopyFile_1" sap:VirtualizedContainerService.HintSize="414,22" />
-      <sap2010:ViewStateData Id="ExcelInsertDeleteColumns_1" sap:VirtualizedContainerService.HintSize="314,22" />
-      <sap2010:ViewStateData Id="ExcelInsertDeleteColumns_2" sap:VirtualizedContainerService.HintSize="314,22" />
-      <sap2010:ViewStateData Id="ExcelWriteCell_1" sap:VirtualizedContainerService.HintSize="314,87" />
-      <sap2010:ViewStateData Id="ExcelWriteCell_3" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="MessageBox_1" sap:VirtualizedContainerService.HintSize="641,59" />
+      <sap2010:ViewStateData Id="SelectFolder_1" sap:VirtualizedContainerService.HintSize="641,22" />
+      <sap2010:ViewStateData Id="CopyFile_1" sap:VirtualizedContainerService.HintSize="641,22" />
+      <sap2010:ViewStateData Id="ExcelInsertDeleteColumns_1" sap:VirtualizedContainerService.HintSize="605,22" />
+      <sap2010:ViewStateData Id="ExcelInsertDeleteColumns_2" sap:VirtualizedContainerService.HintSize="605,22" />
+      <sap2010:ViewStateData Id="ExcelWriteCell_1" sap:VirtualizedContainerService.HintSize="605,87" />
+      <sap2010:ViewStateData Id="ExcelWriteCell_3" sap:VirtualizedContainerService.HintSize="605,87" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="314,60" />
       <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="553,60" />
       <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="242,60" />
@@ -243,17 +244,17 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ExcelSaveWorkbook_1" sap:VirtualizedContainerService.HintSize="314,22" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="336,716">
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="627,2161">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,825" />
+      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="641,2270" />
       <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="414,87" />
       <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="414,59" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,1398">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="663,2843">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
