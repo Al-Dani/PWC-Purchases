@@ -71,12 +71,11 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="STOpenBrowser" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <ui:AddDataColumn x:TypeArguments="x:Object" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="Статус" DataTable="[dataTable]" DisplayName="Add Data Column Status" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" MaxLength="100" Unique="False" />
-    <ui:AddDataColumn x:TypeArguments="x:Object" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="Ссылка" DataTable="[dataTable]" DisplayName="Add Data Column Href" MaxLength="100" Unique="False" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
+    <ui:AddDataColumn x:TypeArguments="x:Object" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="Ссылка" DataTable="[dataTable]" DisplayName="Add Data Column Href" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" MaxLength="100" Unique="False" />
     <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Open Browser" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" NewSession="True" Private="False" Url="[url]">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -236,7 +235,7 @@
                                 </Sequence>
                               </If.Then>
                               <If.Else>
-                                <ui:InjectJsScript InputParameter="{x:Null}" DisplayName="Inject Js Script" sap2010:WorkflowViewState.IdRef="InjectJsScript_1" ScriptCode="&#xD;&#xA;function f()&#xD;&#xA;{&#xD;&#xA;return window.location.href;&#xD;&#xA;}&#xD;&#xA;">
+                                <ui:InjectJsScript InputParameter="{x:Null}" DisplayName="Inject Js Script" sap2010:WorkflowViewState.IdRef="InjectJsScript_1" ScriptCode="&#xA;function f()&#xA;{&#xA;return window.location.href;&#xA;}&#xA;">
                                   <ui:InjectJsScript.ScriptOutput>
                                     <OutArgument x:TypeArguments="x:String">[href]</OutArgument>
                                   </ui:InjectJsScript.ScriptOutput>
@@ -274,7 +273,7 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dzxcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVE9wZW5Ccm93c2VyLnhhbWxUTQOWAg4CAQFOBU6rAgIBZU8FT6kCAgFhUAWUAhYCAQJOkAFOmAECAWhOowFOsAECAWZPkAFPmAECAWRPowFPsAECAWJQuwFQwgECAV9WC5ECFgIBA1g7WD4CAQRaDZACHQIBBVo+WksCAV1gE40CHgIBBmRFZEsCAQdpFXsaAgFXfBWAASMCAVOBARWIASACAU+JARWcARoCAUOdARWtARoCATeuARW8ASACATS9ARXEAR4CAS/FARXJAS4CASrKARXOAScCASXPARX8ASICARD9ARWEAh4CAQyFAhWMAh4CAQhpI2k8AgFYaxl5JAIBWn5vfpwBAgFWfIcBfI0BAgFVfLUCfMgCAgFUhgGoAYYB0AECAVKDAUKDAUYCAVGDATSDATkCAVCJASOJAUwCAUSLARmaASQCAUWdASOdAUwCATifARmrASQCATm6AW+6Ab4BAgE2rgFXrgFcAgE1wgE/wgFPAgEyvwFAvwFMAgEwxQFsxQF3AgEtxwFvxwGvAQIBLMUBPcUBQwIBK8oBYcoBdAIBKcwBb8wBegIBJ8oBL8oBPQIBJs8BpAHPAbIBAgEk1QEb+QEmAgERggJAggJKAgEO/wFB/wFJAgENigJAigJGAgEKhwJBhwJJAgEJd3N3xQECAVxrW2tfAgFbjwEblAErAgFLlQEbmQEpAgFGoAEbpQErAgE/pgEbqgEpAgE62QEd4AEvAgEe4QEd+AEiAgESkgFWkgFiAgFNkQFXkQFoAgFMlwF1lwGrAQIBSpUBtAKVAcICAgFIlQGNAZUBkwECAUejAVajAWICAUGiAVeiAWgCAUCoAXWoAakBAgE+pgGyAqYBwAICATymAY0BpgGTAQIBO9kBU9kBWwIBIdsBSdsBUwIBH94Bd94BfwIBIuEBK+EBZgIBE+MBIewBLAIBGe8BIfYBNQIBFeQBI+sBLAIBGvEBTfEBUwIBF+8BqwHvAYkCAgEW6QFP6QFUAgEd5gFQ5gFaAgEb</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzxcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVE9wZW5Ccm93c2VyLnhhbWxUTAOVAg4CAQFNBU2rAgIBZU4FTqkCAgFhTwWTAhYCAQJNkAFNmAECAWhNowFNsAECAWZOkAFOmAECAWROowFOsAECAWJPuwFPwgECAV9VC5ACFgIBA1c7Vz4CAQRZDY8CHQIBBVk+WUsCAV1fE4wCHgIBBmNFY0sCAQdoFXoaAgFXexV/IwIBU4ABFYcBIAIBT4gBFZsBGgIBQ5wBFawBGgIBN60BFbsBIAIBNLwBFcMBHgIBL8QBFcgBLgIBKskBFc0BJwIBJc4BFfsBIgIBEPwBFYMCHgIBDIQCFYsCHgIBCGgjaDwCAVhqGXgkAgFafW99nAECAVZ7hwF7jQECAVV7tQJ7yAICAVSFAagBhQHQAQIBUoIBQoIBRgIBUYIBNIIBOQIBUIgBI4gBTAIBRIoBGZkBJAIBRZwBI5wBTAIBOJ4BGaoBJAIBObkBb7kBvgECATatAVetAVwCATXBAT/BAU8CATK+AUC+AUwCATDEAWzEAXcCAS3GAW/GAa8BAgEsxAE9xAFDAgEryQFhyQF0AgEpywFvywF6AgEnyQEvyQE9AgEmzgGkAc4BsgECASTUARv4ASYCARGBAkCBAkoCAQ7+AUH+AUkCAQ2JAkCJAkYCAQqGAkGGAkkCAQl2c3bFAQIBXGpbal8CAVuOARuTASsCAUuUARuYASkCAUafARukASsCAT+lARupASkCATrYAR3fAS8CAR7gAR33ASICARKRAVaRAWICAU2QAVeQAWgCAUyWAXWWAasBAgFKlAG0ApQBwgICAUiUAY0BlAGTAQIBR6IBVqIBYgIBQaEBV6EBaAIBQKcBdacBqQECAT6lAbICpQHAAgIBPKUBjQGlAZMBAgE72AFT2AFbAgEh2gFJ2gFTAgEf3QF33QF/AgEi4AEr4AFmAgET4gEh6wEsAgEZ7gEh9QE1AgEV4wEj6gEsAgEa8AFN8AFTAgEX7gGrAe4B8AECARboAU/oAVQCAR3lAVDlAVoCARs=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
