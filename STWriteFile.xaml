@@ -13,6 +13,7 @@
   <x:Members>
     <x:Property Name="dataTable" Type="InArgument(sd:DataTable)" />
     <x:Property Name="originFile" Type="InArgument(x:String)" />
+    <x:Property Name="destinationFolder" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -68,17 +69,13 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="STWriteFile" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="тут должна быть поисковая строка" Name="href" />
-      <Variable x:TypeArguments="x:String" Name="destinationFolder" />
       <Variable x:TypeArguments="x:String" Default="Purchase requests result.xlsx" Name="resultFile" />
     </Sequence.Variables>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="Пожалуйста, выберите папку для сохранения результата" TopMost="True" />
-    <ui:SelectFolder DisplayName="Select Folder" sap2010:WorkflowViewState.IdRef="SelectFolder_1" SelectedFolder="[destinationFolder]" />
     <ui:CopyFile ContinueOnError="True" Destination="[destinationFolder + &quot;/&quot; + resultFile]" DisplayName="Copy File" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[originFile]" />
     <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="[destinationFolder + &quot;/&quot; + resultFile]">
       <ui:ExcelApplicationScope.Body>
@@ -184,12 +181,10 @@
     </ui:ExcelApplicationScope>
     <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start Process" FileName="[destinationFolder + &quot;/&quot; + resultFile]" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="Обработка успешно завершена" TopMost="True" />
-    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sT0oDvAEOAgEBTDRMVgIBA040TlMCAQJQBVDiAQIBZVEFUYoBAgFiUgVS1AECAVtTBbgBIAIBCrkBBbkB0gECAQa6AQW6AckBAgEEUJoBUNABAgFmUXJRhwECAWNSIlIoAgFhUjVSZwIBXlLDAVLRAQIBXFOgAVPSAQIBWFkLtQEWAgELuQFsuQGeAQIBB7oBmgG6AbcBAgEFXg1eyAECAVRfDV/GAQIBUGANYJwBAgFMYQ1hnAECAUhiDWkWAgFEag2zAR0CAQ20AQ20AXcCAQxerAFerwECAVdenwFeogECAVZeugFexQECAVVfqgFfrQECAVNfnQFfoAECAVJfuAFfwwECAVFgJWApAgFPYJEBYJkBAgFOYIABYIsBAgFNYSVhKQIBS2GRAWGZAQIBSmGAAWGLAQIBSWc3ZzgCAUdkOGREAgFFaj5qSwIBQnATsAEeAgEOdBV7HgIBPXwVlwEaAgEnmAEVmAG3AQIBIZkBFacBGgIBFKgBFa8BHgIBD3lAeVsCAUB2QXZNAgE+fCN8OgIBKH4ZiAEkAgEziwEZlQEkAgEpmAEtmAE7AgElmAGqAZgBtAECASOYAZkBmAGkAQIBIpkBI5kBOgIBFZsBGaUBJAIBFq0BP60BTwIBEqoBQKoBTAIBEH8bhgEkAgE5hwEbhwHXAQIBNIwBG5MBJAIBL5QBG5QB2QECASqcARujASQCARykARukAcYBAgEXhAFGhAFIAgE8gQFHgQFPAgE6hwE4hwFUAgE4hwGwAYcBvgECATaHAckBhwHUAQIBNZEBRpEBSQIBMo4BR44BTwIBMJQBOJQBVgIBLpQBsgGUAcABAgEslAHLAZQB1gECASuhAUahAWECAR+eAUeeAVMCAR2kATOkAUECARqkAbABpAHDAQIBGaQBnwGkAaoBAgEY</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sS0oDuQEOAgEBTDRMVgIBA000TVMCAQJPBU/UAQIBW1AFtQEgAgEKtgEFtgHSAQIBBrcBBbcByQECAQRPIk8oAgFhTzVPZwIBXk/DAU/RAQIBXFCgAVDSAQIBWFYLsgEWAgELtgFstgGeAQIBB7cBmgG3AbcBAgEFWw1byAECAVRcDVzGAQIBUF0NXZwBAgFMXg1enAECAUhfDWYWAgFEZw2wAR0CAQ2xAQ2xAXcCAQxbrAFbrwECAVdbnwFbogECAVZbugFbxQECAVVcqgFcrQECAVNcnQFcoAECAVJcuAFcwwECAVFdJV0pAgFPXZEBXZkBAgFOXYABXYsBAgFNXiVeKQIBS16RAV6ZAQIBSl6AAV6LAQIBSWQ3ZDgCAUdhOGFEAgFFZz5nSwIBQm0TrQEeAgEOcRV4HgIBPXkVlAEaAgEnlQEVlQG3AQIBIZYBFaQBGgIBFKUBFawBHgIBD3ZAdlsCAUBzQXNNAgE+eSN5OgIBKHsZhQEkAgEziAEZkgEkAgEplQEtlQE7AgEllQGqAZUBtAECASOVAZkBlQGkAQIBIpYBI5YBOgIBFZgBGaIBJAIBFqoBP6oBTwIBEqcBQKcBTAIBEHwbgwEkAgE5hAEbhAHXAQIBNIkBG5ABJAIBL5EBG5EB2QECASqZARugASQCARyhARuhAcYBAgEXgQFGgQFIAgE8fkd+TwIBOoQBOIQBVAIBOIQBsAGEAb4BAgE2hAHJAYQB1AECATWOAUaOAUkCATKLAUeLAU8CATCRATiRAVYCAS6RAbIBkQHAAQIBLJEBywGRAdYBAgErngFGngFhAgEfmwFHmwFTAgEdoQEzoQFBAgEaoQGwAaEBwwECARmhAZ8BoQGqAQIBGA==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="MessageBox_1" sap:VirtualizedContainerService.HintSize="414,59" />
-      <sap2010:ViewStateData Id="SelectFolder_1" sap:VirtualizedContainerService.HintSize="414,22" />
       <sap2010:ViewStateData Id="CopyFile_1" sap:VirtualizedContainerService.HintSize="414,22" />
       <sap2010:ViewStateData Id="ExcelInsertDeleteColumns_1" sap:VirtualizedContainerService.HintSize="314,22" />
       <sap2010:ViewStateData Id="ExcelInsertDeleteColumns_2" sap:VirtualizedContainerService.HintSize="314,22" />
@@ -254,14 +249,14 @@
       <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,825" />
       <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="414,87" />
       <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="414,59" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,1398">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,1237">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="STWriteFile_1" sap:VirtualizedContainerService.HintSize="476,1478" />
+      <sap2010:ViewStateData Id="STWriteFile_1" sap:VirtualizedContainerService.HintSize="476,1317" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
