@@ -120,7 +120,7 @@
                         </ui:Click>
                       </If.Then>
                     </If>
-                    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" Activate="True" ClickBeforeTyping="False" DelayMS="5000" DisplayName="Type Into &quot;Input customer&quot;" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="True" Text="[row(1).ToString]">
+                    <ui:TypeInto DelayBetweenKeys="{x:Null}" Activate="True" ClickBeforeTyping="False" DelayBefore="2000" DelayMS="5000" DisplayName="Type Into &quot;Input customer&quot;" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="True" Text="[row(1).ToString]">
                       <ui:TypeInto.Target>
                         <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;webctrl id='customer' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
                       </ui:TypeInto.Target>
@@ -273,7 +273,7 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dzxcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVE9wZW5Ccm93c2VyLnhhbWxUTAOVAg4CAQFNBU2rAgIBZU4FTqkCAgFhTwWTAhYCAQJNkAFNmAECAWhNowFNsAECAWZOkAFOmAECAWROowFOsAECAWJPuwFPwgECAV9VC5ACFgIBA1c7Vz4CAQRZDY8CHQIBBVk+WUsCAV1fE4wCHgIBBmNFY0sCAQdoFXoaAgFXexV/IwIBU4ABFYcBIAIBT4gBFZsBGgIBQ5wBFawBGgIBN60BFbsBIAIBNLwBFcMBHgIBL8QBFcgBLgIBKskBFc0BJwIBJc4BFfsBIgIBEPwBFYMCHgIBDIQCFYsCHgIBCGgjaDwCAVhqGXgkAgFafW99nAECAVZ7hwF7jQECAVV7tQJ7yAICAVSFAagBhQHQAQIBUoIBQoIBRgIBUYIBNIIBOQIBUIgBI4gBTAIBRIoBGZkBJAIBRZwBI5wBTAIBOJ4BGaoBJAIBObkBb7kBvgECATatAVetAVwCATXBAT/BAU8CATK+AUC+AUwCATDEAWzEAXcCAS3GAW/GAa8BAgEsxAE9xAFDAgEryQFhyQF0AgEpywFvywF6AgEnyQEvyQE9AgEmzgGkAc4BsgECASTUARv4ASYCARGBAkCBAkoCAQ7+AUH+AUkCAQ2JAkCJAkYCAQqGAkGGAkkCAQl2c3bFAQIBXGpbal8CAVuOARuTASsCAUuUARuYASkCAUafARukASsCAT+lARupASkCATrYAR3fAS8CAR7gAR33ASICARKRAVaRAWICAU2QAVeQAWgCAUyWAXWWAasBAgFKlAG0ApQBwgICAUiUAY0BlAGTAQIBR6IBVqIBYgIBQaEBV6EBaAIBQKcBdacBqQECAT6lAbICpQHAAgIBPKUBjQGlAZMBAgE72AFT2AFbAgEh2gFJ2gFTAgEf3QF33QF/AgEi4AEr4AFmAgET4gEh6wEsAgEZ7gEh9QE1AgEV4wEj6gEsAgEa8AFN8AFTAgEX7gGrAe4B8AECARboAU/oAVQCAR3lAVDlAVoCARs=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzxcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVE9wZW5Ccm93c2VyLnhhbWxVTAOVAg4CAQFNBU2rAgIBZk4FTqkCAgFiTwWTAhYCAQJNkAFNmAECAWlNowFNsAECAWdOkAFOmAECAWVOowFOsAECAWNPuwFPwgECAWBVC5ACFgIBA1c7Vz4CAQRZDY8CHQIBBVk+WUsCAV5fE4wCHgIBBmNFY0sCAQdoFXoaAgFYexV/IwIBU4ABFYcBIAIBT4gBFZsBGgIBQ5wBFawBGgIBN60BFbsBIAIBNLwBFcMBHgIBL8QBFcgBLgIBKskBFc0BJwIBJc4BFfsBIgIBEPwBFYMCHgIBDIQCFYsCHgIBCGgjaDwCAVlqGXgkAgFbfW99nAECAVd7gwF7iQECAVZ7sQJ7xAICAVV7dHt6AgFUhQGoAYUB0AECAVKCAUKCAUYCAVGCATSCATkCAVCIASOIAUwCAUSKARmZASQCAUWcASOcAUwCATieARmqASQCATm5AW+5Ab4BAgE2rQFXrQFcAgE1wQE/wQFPAgEyvgFAvgFMAgEwxAFsxAF3AgEtxgFvxgGvAQIBLMQBPcQBQwIBK8kBYckBdAIBKcsBb8sBegIBJ8kBL8kBPQIBJs4BpAHOAbIBAgEk1AEb+AEmAgERgQJAgQJKAgEO/gFB/gFJAgENiQJAiQJGAgEKhgJBhgJJAgEJdnN2xQECAV1qW2pfAgFcjgEbkwErAgFLlAEbmAEpAgFGnwEbpAErAgE/pQEbqQEpAgE62AEd3wEvAgEe4AEd9wEiAgESkQFWkQFiAgFNkAFXkAFoAgFMlgF1lgGrAQIBSpQBtAKUAcICAgFIlAGNAZQBkwECAUeiAVaiAWICAUGhAVehAWgCAUCnAXWnAakBAgE+pQGyAqUBwAICATylAY0BpQGTAQIBO9gBU9gBWwIBIdoBSdoBUwIBH90Bd90BfwIBIuABK+ABZgIBE+IBIesBLAIBGe4BIfUBNQIBFeMBI+oBLAIBGvABTfABUwIBF+4BqwHuAfABAgEW6AFP6AFUAgEd5QFQ5QFaAgEb</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -328,7 +328,7 @@
       <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="641,729" />
       <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="641,60" />
       <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="641,60" />
-      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="248,52">
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="663,3245">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
