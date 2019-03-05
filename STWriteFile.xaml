@@ -75,8 +75,9 @@
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="тут должна быть поисковая строка" Name="href" />
       <Variable x:TypeArguments="x:String" Default="Purchase requests result.xlsx" Name="resultFile" />
-      <Variable x:TypeArguments="x:String" Name="sheetName" />
+      <Variable x:TypeArguments="x:String" Default="Закупки" Name="sheetName" />
     </Sequence.Variables>
+    <ui:Delete ContinueOnError="True" DisplayName="Delete result file" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[destinationFolder + &quot;/&quot; + resultFile]" />
     <ui:ExcelApplicationScope Password="{x:Null}" CreateNewFile="False" DisplayName="Excel Application Scope" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" WorkbookPath="resultFormat.xlsx">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
@@ -88,7 +89,7 @@
               <Variable x:TypeArguments="sd:DataTable" Name="formatTable" />
             </Sequence.Variables>
             <ui:ExcelReadRange AddHeaders="False" DataTable="[formatTable]" DisplayName="Read Range" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" PreserveFormat="True" Range="A1" SheetName="Format" />
-            <ui:ExcelCopySheet DestinationFilePath="[destinationFolder + &quot;/&quot; + resultFile]" DestinationSheetName="Format" DisplayName="Copy Sheet" sap2010:WorkflowViewState.IdRef="ExcelCopySheet_2" SheetName="Format" />
+            <ui:ExcelCopySheet DestinationFilePath="[destinationFolder + &quot;/&quot; + resultFile]" DestinationSheetName="Закупки" DisplayName="Copy Sheet" sap2010:WorkflowViewState.IdRef="ExcelCopySheet_2" SheetName="Format" />
           </Sequence>
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
@@ -106,16 +107,6 @@
               <Variable x:TypeArguments="x:Int32" Name="finalOutTableLength" />
             </Sequence.Variables>
             <Sequence DisplayName="Insert Headers" sap2010:WorkflowViewState.IdRef="Sequence_11">
-              <ui:ExcelGetWorkbookSheet DisplayName="Get Workbook Sheet" sap2010:WorkflowViewState.IdRef="ExcelGetWorkbookSheet_1" Index="0" Sheet="[sheetName]" />
-              <ui:ExcelInsertDeleteColumns DisplayName="Insert Header Columns" sap2010:WorkflowViewState.IdRef="ExcelInsertDeleteColumns_3" Mode="Add" NoColumns="6" Position="1" SheetName="[sheetName]" />
-              <Sequence DisplayName="Formating Headers" sap2010:WorkflowViewState.IdRef="Sequence_18">
-                <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="A1" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_6" SheetName="Format" SourceRange="A1" />
-                <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="B1" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_7" SheetName="Format" SourceRange="B1" />
-                <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="C1" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_8" SheetName="Format" SourceRange="C1" />
-                <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="D1" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_9" SheetName="Format" SourceRange="D1" />
-                <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="E1" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_10" SheetName="Format" SourceRange="E1" />
-                <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="F1" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_11" SheetName="Format" SourceRange="F1" />
-              </Sequence>
               <ui:ExcelWriteCell Cell="A1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_6" SheetName="[sheetName]" Text="Статус" />
               <ui:ExcelWriteCell Cell="B1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_7" SheetName="[sheetName]" Text="Название компании" />
               <ui:ExcelWriteCell Cell="C1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_8" SheetName="[sheetName]" Text="ИНН" />
@@ -141,13 +132,6 @@
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Name="statusCell" />
                     </Sequence.Variables>
-                    <Sequence DisplayName="Formating" sap2010:WorkflowViewState.IdRef="Sequence_17">
-                      <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="[&quot;B&quot;+currentRow.ToString]" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_1" SheetName="Format" SourceRange="B2" />
-                      <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="[&quot;C&quot;+currentRow.ToString]" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_2" SheetName="Format" SourceRange="C2" />
-                      <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="[&quot;D&quot;+currentRow.ToString]" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_3" SheetName="Format" SourceRange="D2" />
-                      <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="[&quot;E&quot;+currentRow.ToString]" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_4" SheetName="Format" SourceRange="E2" />
-                      <ui:ExcelCopyPasteRange CopyItems="NumberFormat, CellFormat" DestinationCell="[&quot;F&quot;+currentRow.ToString]" DestinationSheet="[sheetName]" DisplayName="Copy Paste Range" sap2010:WorkflowViewState.IdRef="ExcelCopyPasteRange_5" SheetName="Format" SourceRange="F2" />
-                    </Sequence>
                     <Assign sap2010:WorkflowViewState.IdRef="Assign_13">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
@@ -158,33 +142,37 @@
                     </Assign>
                     <If Condition="[row(4).Equals(True)]" sap2010:WorkflowViewState.IdRef="If_4">
                       <If.Then>
-                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_12">
-                          <Assign sap2010:WorkflowViewState.IdRef="Assign_14">
-                            <Assign.To>
-                              <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
-                            </Assign.To>
-                            <Assign.Value>
-                              <InArgument x:TypeArguments="x:String">Да</InArgument>
-                            </Assign.Value>
-                          </Assign>
-                          <ui:ExcelSetRangeColor Color="[System.Drawing.Color.Red]" DisplayName="Set Range Color" sap2010:WorkflowViewState.IdRef="ExcelSetRangeColor_3" Range="[statusCell]" SheetName="[sheetName]" />
-                        </Sequence>
+                        <Assign>
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">Да</InArgument>
+                          </Assign.Value>
+                          <sap2010:WorkflowViewState.IdRef>Assign_22</sap2010:WorkflowViewState.IdRef>
+                        </Assign>
                       </If.Then>
                       <If.Else>
-                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_13">
-                          <Assign sap2010:WorkflowViewState.IdRef="Assign_15">
-                            <Assign.To>
-                              <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
-                            </Assign.To>
-                            <Assign.Value>
-                              <InArgument x:TypeArguments="x:String">Нет</InArgument>
-                            </Assign.Value>
-                          </Assign>
-                          <ui:ExcelSetRangeColor Color="[System.Drawing.Color.Green]" DisplayName="Set Range Color" sap2010:WorkflowViewState.IdRef="ExcelSetRangeColor_4" Range="[statusCell]" SheetName="[sheetName]" />
-                        </Sequence>
+                        <Assign>
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">Нет</InArgument>
+                          </Assign.Value>
+                          <sap2010:WorkflowViewState.IdRef>Assign_23</sap2010:WorkflowViewState.IdRef>
+                        </Assign>
                       </If.Else>
                     </If>
                     <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Status" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_12" SheetName="[sheetName]" Text="[status]" />
+                    <If Condition="[row(4).Equals(True)]" sap2010:WorkflowViewState.IdRef="If_6">
+                      <If.Then>
+                        <ui:ExcelSetRangeColor Color="[System.Drawing.Color.Red]" DisplayName="Set Range Color" sap2010:WorkflowViewState.IdRef="ExcelSetRangeColor_6" Range="[statusCell]" SheetName="[sheetName]" />
+                      </If.Then>
+                      <If.Else>
+                        <ui:ExcelSetRangeColor Color="[System.Drawing.Color.Green]" DisplayName="Set Range Color" sap2010:WorkflowViewState.IdRef="ExcelSetRangeColor_7" Range="[statusCell]" SheetName="[sheetName]" />
+                      </If.Else>
+                    </If>
                     <Sequence DisplayName="Переносим данные" sap2010:WorkflowViewState.IdRef="Sequence_14">
                       <Assign sap2010:WorkflowViewState.IdRef="Assign_16">
                         <Assign.To>
@@ -250,7 +238,6 @@
                 </ActivityAction>
               </ui:ForEachRow.Body>
             </ui:ForEachRow>
-            <ui:ExcelDeleteRange DisplayName="Delete Range" Range="A1:F2" SheetName="Format" ShiftCells="False" ShiftOption="ShiftUp" sap2010:WorkflowViewState.IdRef="ExcelDeleteRange_1" />
             <ui:ExcelSaveWorkbook DisplayName="Save Workbook" sap2010:WorkflowViewState.IdRef="ExcelSaveWorkbook_1" />
           </Sequence>
         </ActivityAction>
@@ -258,10 +245,11 @@
     </ui:ExcelApplicationScope>
     <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start Process" FileName="[destinationFolder + &quot;/&quot; + resultFile]" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="Обработка успешно завершена" TopMost="True" />
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sfEoD+QEOAgEBTDRMVgIBBE00TVMCAQNONE49AgECUAVQrQEDAaoBUQVgIAMBnAFhBfUBIAIBC/YBBfYB0gECAQf3AQX3AckBAgEFUCBQJgMBrgFQeFCqAQMBqwFRtgFRyQEDAakBVwtdFgMBnQFhoAFh0gEDAZkBZwvyARYCAQz2AWz2AZ4BAgEI9wGaAfcBtwECAQZbDVvPAQMBpAFcDVznAQMBngFtDXQYAgF6dQ18FgIBdn0N8AEdAgEO8QEN8QF3AgENWz1bTAMBpwFbtQFbuQEDAaYBW8QBW8wBAwGlAVw0XGYDAaEBXHxchQEDAaABXNwBXOQBAwGfAW4PbqABAwGUAW8Pb6sBAwGPAXAPcJ0BAwGKAXEPcagBAwGFAXIPcqwBAwGAAXMPc6EBAgF7ejd6OAIBeXc4d0QCAXd9Pn1LAgF0gwET7QEeAgEPbiduKwMBmAFulQFunQEDAZcBboIBbo8BAwGVAW8nbysDAZMBb5UBb6gBAwGSAW+CAW+PAQMBkAFwJ3ArAwGOAXCVAXCaAQMBjQFwggFwjwEDAYsBcSdxKwMBiQFxlQFxpQEDAYgBcYIBcY8BAwGGAXIncisDAYQBcpYBcqkBAwGDAXKDAXKQAQMBgQFzJ3MrAgF/c5YBc54BAgF+c4MBc5ABAgF8hwEVjgEeAgFvjwEVpgEaAgFlpwEVpwG6AQIBXqgBFa8BGgIBULABFdUBIAIBI9YBFeQBGgIBFeUBFewBHgIBEIwBQIwBWwIBcokBQYkBTQIBcI8BI48BOgIBZpEBGZkBIgIBa5wBGaQBIgIBZ6cBLacBOwIBY6cBrQGnAbcBAgFhpwGaAacBpwECAV+oASOoAToCAVGqARmqAdcBAgFYrQEZrQHZAQIBUrEBF7gBIAIBS7kBF7kBywECAUW6ARfBASACAUDCARfCAcIBAgE6wwEXygEgAgE1ywEXywHIAQIBL8wBF9MBIAIBKtQBF9QByQECASTWASPWAToCARbYARniASQCARfqAT/qAU8CARPnAUDnAUwCARGWAUSWAUYCAW6TAUWTAU0CAWyhAUShAUcCAWqeAUWeAU0CAWiqATaqAVICAV2qAa4BqgG8AQIBW6oBxwGqAdQBAgFZrQE2rQFUAgFXrQGwAa0BvgECAVWtAckBrQHWAQIBU7YBQrYBXQIBTrMBQ7MBTwIBTLkBL7kBPQIBSbkBtQG5AcgBAgFIuQGiAbkBrwECAUa/AUK/AV0CAUO8AUO8AU8CAUHCAS/CAT0CAT7CAawBwgG/AQIBPcIBmQHCAaYBAgE7yAFCyAFdAgE4xQFDxQFPAgE2ywEvywE9AgEzywGyAcsBxQECATLLAZ8BywGsAQIBMNEBQtEBXQIBLc4BQ84BTwIBK9QBL9QBPQIBKNQBswHUAcYBAgEn1AGgAdQBrQECASXZARvgASQCAR7hARvhAckBAgEY3gFG3gFhAgEh2wFH2wFTAgEf4QEz4QFBAgEc4QGzAeEBxgECARvhAaAB4QGtAQIBGQ==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Delete_1" sap:VirtualizedContainerService.HintSize="414,22" />
       <sap2010:ViewStateData Id="ExcelReadRange_1" sap:VirtualizedContainerService.HintSize="314,59" />
       <sap2010:ViewStateData Id="ExcelCopySheet_2" sap:VirtualizedContainerService.HintSize="314,22" />
       <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="336,245">
@@ -272,28 +260,13 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ExcelApplicationScope_2" sap:VirtualizedContainerService.HintSize="414,354" />
-      <sap2010:ViewStateData Id="ExcelGetWorkbookSheet_1" sap:VirtualizedContainerService.HintSize="314,22" />
-      <sap2010:ViewStateData Id="ExcelInsertDeleteColumns_3" sap:VirtualizedContainerService.HintSize="314,22" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_6" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_7" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_8" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_9" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_10" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_11" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="314,456">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ExcelWriteCell_6" sap:VirtualizedContainerService.HintSize="314,87" />
       <sap2010:ViewStateData Id="ExcelWriteCell_7" sap:VirtualizedContainerService.HintSize="314,87" />
       <sap2010:ViewStateData Id="ExcelWriteCell_8" sap:VirtualizedContainerService.HintSize="314,87" />
       <sap2010:ViewStateData Id="ExcelWriteCell_9" sap:VirtualizedContainerService.HintSize="314,87" />
       <sap2010:ViewStateData Id="ExcelWriteCell_10" sap:VirtualizedContainerService.HintSize="314,87" />
       <sap2010:ViewStateData Id="ExcelWriteCell_11" sap:VirtualizedContainerService.HintSize="314,87" />
-      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336,1466">
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336,846">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -301,39 +274,14 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_12" sap:VirtualizedContainerService.HintSize="336,60" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_1" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_2" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_3" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_4" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="ExcelCopyPasteRange_5" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="Sequence_17" sap:VirtualizedContainerService.HintSize="553,394">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="553,60" />
-      <sap2010:ViewStateData Id="Assign_14" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="ExcelSetRangeColor_3" sap:VirtualizedContainerService.HintSize="242,22" />
-      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="264,246">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_15" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="ExcelSetRangeColor_4" sap:VirtualizedContainerService.HintSize="242,22" />
-      <sap2010:ViewStateData Id="Sequence_13" sap:VirtualizedContainerService.HintSize="264,246">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="553,396" />
-      <sap2010:ViewStateData Id="ExcelWriteCell_12" sap:VirtualizedContainerService.HintSize="553,87" />
+      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="525.5,60" />
+      <sap2010:ViewStateData Id="Assign_22" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_23" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="525.5,210" />
+      <sap2010:ViewStateData Id="ExcelWriteCell_12" sap:VirtualizedContainerService.HintSize="525.5,87" />
+      <sap2010:ViewStateData Id="ExcelSetRangeColor_6" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="ExcelSetRangeColor_7" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="525.5,210" />
       <sap2010:ViewStateData Id="Assign_16" sap:VirtualizedContainerService.HintSize="314,60" />
       <sap2010:ViewStateData Id="ExcelWriteCell_13" sap:VirtualizedContainerService.HintSize="314,87" />
       <sap2010:ViewStateData Id="Assign_17" sap:VirtualizedContainerService.HintSize="314,60" />
@@ -342,7 +290,7 @@
       <sap2010:ViewStateData Id="ExcelWriteCell_15" sap:VirtualizedContainerService.HintSize="314,87" />
       <sap2010:ViewStateData Id="Assign_19" sap:VirtualizedContainerService.HintSize="314,60" />
       <sap2010:ViewStateData Id="ExcelWriteCell_16" sap:VirtualizedContainerService.HintSize="314,87" />
-      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="553,992">
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="525.5,992">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -358,16 +306,16 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="553,461" />
-      <sap2010:ViewStateData Id="Assign_21" sap:VirtualizedContainerService.HintSize="553,60" />
-      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="575,2814">
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="525.5,461" />
+      <sap2010:ViewStateData Id="Assign_21" sap:VirtualizedContainerService.HintSize="525.5,60" />
+      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="547.5,2444">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEachRow_2" sap:VirtualizedContainerService.HintSize="336,52">
+      <sap2010:ViewStateData Id="ForEachRow_2" sap:VirtualizedContainerService.HintSize="577.5,2593">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -375,26 +323,25 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelDeleteRange_1" sap:VirtualizedContainerService.HintSize="336,22" />
       <sap2010:ViewStateData Id="ExcelSaveWorkbook_1" sap:VirtualizedContainerService.HintSize="336,22" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="358,1906">
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="358,1224">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,2015" />
+      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,1333" />
       <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="414,87" />
       <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="414,59" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,2759">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,2139">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="STWriteFile_1" sap:VirtualizedContainerService.HintSize="476,2281" />
+      <sap2010:ViewStateData Id="STWriteFile_1" sap:VirtualizedContainerService.HintSize="476,2219" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
