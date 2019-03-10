@@ -78,188 +78,164 @@
       <Variable x:TypeArguments="x:String" Default="Закупки" Name="sheetName" />
     </Sequence.Variables>
     <ui:Delete ContinueOnError="True" DisplayName="Delete result file" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[destinationFolder + &quot;/&quot; + resultFile]" />
-    <ui:ExcelApplicationScope Password="{x:Null}" CreateNewFile="False" DisplayName="Excel Application Scope" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" WorkbookPath="resultFormat.xlsx">
-      <ui:ExcelApplicationScope.Body>
-        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_8">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="sd:DataTable" Name="formatTable" />
-            </Sequence.Variables>
-            <ui:ExcelReadRange AddHeaders="False" DataTable="[formatTable]" DisplayName="Read Range" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" PreserveFormat="True" Range="A1" SheetName="Format" />
-            <ui:ExcelCopySheet DestinationFilePath="[destinationFolder + &quot;/&quot; + resultFile]" DestinationSheetName="Закупки" DisplayName="Copy Sheet" sap2010:WorkflowViewState.IdRef="ExcelCopySheet_2" SheetName="Format" />
-          </Sequence>
-        </ActivityAction>
-      </ui:ExcelApplicationScope.Body>
-    </ui:ExcelApplicationScope>
+    <ui:CopyFile ContinueOnError="{x:Null}" Destination="[destinationFolder + &quot;/&quot; + resultFile]" DisplayName="Copy File" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="False" Path="resultFormat.xlsx" />
     <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="[destinationFolder + &quot;/&quot; + resultFile]">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_3">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="x:Int32" Name="currentRow" />
-              <Variable x:TypeArguments="x:String" Name="status" />
-              <Variable x:TypeArguments="x:Int32" Name="finalOutTableLength" />
-            </Sequence.Variables>
-            <Sequence DisplayName="Insert Headers" sap2010:WorkflowViewState.IdRef="Sequence_11">
-              <ui:ExcelWriteCell Cell="A1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_6" SheetName="[sheetName]" Text="Статус" />
-              <ui:ExcelWriteCell Cell="B1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_7" SheetName="[sheetName]" Text="Название компании" />
-              <ui:ExcelWriteCell Cell="C1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_8" SheetName="[sheetName]" Text="ИНН" />
-              <ui:ExcelWriteCell Cell="D1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_9" SheetName="[sheetName]" Text="Начало периода" />
-              <ui:ExcelWriteCell Cell="E1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_10" SheetName="[sheetName]" Text="Окончание периода" />
-              <ui:ExcelWriteCell Cell="F1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_11" SheetName="[sheetName]" Text="Ссылка" />
-            </Sequence>
-            <Assign sap2010:WorkflowViewState.IdRef="Assign_12">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:Int32">[currentRow]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:Int32">2</InArgument>
-              </Assign.Value>
-            </Assign>
-            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dataTable]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
-              <ui:ForEachRow.Body>
-                <ActivityAction x:TypeArguments="sd:DataRow">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
-                  </ActivityAction.Argument>
-                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_16">
-                    <Sequence.Variables>
-                      <Variable x:TypeArguments="x:String" Name="statusCell" />
-                    </Sequence.Variables>
-                    <Assign sap2010:WorkflowViewState.IdRef="Assign_13">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:String">["A" + currentRow.ToString]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                    <If Condition="[row(4).Equals(True)]" sap2010:WorkflowViewState.IdRef="If_4">
-                      <If.Then>
-                        <Assign>
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="x:String">Да</InArgument>
-                          </Assign.Value>
-                          <sap2010:WorkflowViewState.IdRef>Assign_22</sap2010:WorkflowViewState.IdRef>
-                        </Assign>
-                      </If.Then>
-                      <If.Else>
-                        <Assign>
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="x:String">Нет</InArgument>
-                          </Assign.Value>
-                          <sap2010:WorkflowViewState.IdRef>Assign_23</sap2010:WorkflowViewState.IdRef>
-                        </Assign>
-                      </If.Else>
-                    </If>
-                    <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Status" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_12" SheetName="[sheetName]" Text="[status]" />
-                    <If Condition="[row(4).Equals(True)]" sap2010:WorkflowViewState.IdRef="If_6">
-                      <If.Then>
-                        <ui:ExcelSetRangeColor Color="[System.Drawing.Color.Red]" DisplayName="Set Range Color" sap2010:WorkflowViewState.IdRef="ExcelSetRangeColor_6" Range="[statusCell]" SheetName="[sheetName]" />
-                      </If.Then>
-                      <If.Else>
-                        <ui:ExcelSetRangeColor Color="[System.Drawing.Color.Green]" DisplayName="Set Range Color" sap2010:WorkflowViewState.IdRef="ExcelSetRangeColor_7" Range="[statusCell]" SheetName="[sheetName]" />
-                      </If.Else>
-                    </If>
-                    <Sequence DisplayName="Переносим данные" sap2010:WorkflowViewState.IdRef="Sequence_14">
-                      <Assign sap2010:WorkflowViewState.IdRef="Assign_16">
+          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_19">
+            <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:Int32" Name="currentRow" />
+                <Variable x:TypeArguments="x:String" Name="status" />
+                <Variable x:TypeArguments="x:Int32" Name="finalOutTableLength" />
+              </Sequence.Variables>
+              <Sequence DisplayName="Insert Headers" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                <ui:ExcelWriteCell Cell="A1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_6" SheetName="[sheetName]" Text="Статус" />
+                <ui:ExcelWriteCell Cell="B1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_7" SheetName="[sheetName]" Text="Название компании" />
+                <ui:ExcelWriteCell Cell="C1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_8" SheetName="[sheetName]" Text="ИНН" />
+                <ui:ExcelWriteCell Cell="D1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_9" SheetName="[sheetName]" Text="Начало периода" />
+                <ui:ExcelWriteCell Cell="E1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_10" SheetName="[sheetName]" Text="Окончание периода" />
+                <ui:ExcelWriteCell Cell="F1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_11" SheetName="[sheetName]" Text="Ссылка" />
+              </Sequence>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_12">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[currentRow]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">2</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dataTable]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                <ui:ForEachRow.Body>
+                  <ActivityAction x:TypeArguments="sd:DataRow">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                    </ActivityAction.Argument>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_16">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:String" Name="statusCell" />
+                      </Sequence.Variables>
+                      <Assign sap2010:WorkflowViewState.IdRef="Assign_13">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="x:String">["B" + currentRow.ToString]</InArgument>
+                          <InArgument x:TypeArguments="x:String">["A" + currentRow.ToString]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Company Name" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_13" SheetName="[sheetName]" Text="[row(0).ToString]" />
-                      <Assign sap2010:WorkflowViewState.IdRef="Assign_17">
-                        <Assign.To>
-                          <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
-                        </Assign.To>
-                        <Assign.Value>
-                          <InArgument x:TypeArguments="x:String">["C" + currentRow.ToString]</InArgument>
-                        </Assign.Value>
-                      </Assign>
-                      <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell INN" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_14" SheetName="[sheetName]" Text="[row(1).ToString]" />
-                      <Assign sap2010:WorkflowViewState.IdRef="Assign_18">
-                        <Assign.To>
-                          <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
-                        </Assign.To>
-                        <Assign.Value>
-                          <InArgument x:TypeArguments="x:String">["D" + currentRow.ToString]</InArgument>
-                        </Assign.Value>
-                      </Assign>
-                      <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell StartDate" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_15" SheetName="[sheetName]" Text="[row(2).ToString]" />
-                      <Assign sap2010:WorkflowViewState.IdRef="Assign_19">
-                        <Assign.To>
-                          <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
-                        </Assign.To>
-                        <Assign.Value>
-                          <InArgument x:TypeArguments="x:String">["E" + currentRow.ToString]</InArgument>
-                        </Assign.Value>
-                      </Assign>
-                      <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell FinishDate" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_16" SheetName="[sheetName]" Text="[row(3).ToString]" />
-                    </Sequence>
-                    <If Condition="[row(4).Equals(True)]" sap2010:WorkflowViewState.IdRef="If_5">
-                      <If.Then>
-                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_15">
-                          <Assign sap2010:WorkflowViewState.IdRef="Assign_20">
+                      <If Condition="[row(4).Equals(True)]" sap2010:WorkflowViewState.IdRef="If_4">
+                        <If.Then>
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_22">
                             <Assign.To>
-                              <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
+                              <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
                             </Assign.To>
                             <Assign.Value>
-                              <InArgument x:TypeArguments="x:String">["F" + currentRow.ToString]</InArgument>
+                              <InArgument x:TypeArguments="x:String">Да</InArgument>
                             </Assign.Value>
                           </Assign>
-                          <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Status" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_17" SheetName="[sheetName]" Text="[row(5).ToString]" />
-                        </Sequence>
-                      </If.Then>
-                    </If>
-                    <Assign sap2010:WorkflowViewState.IdRef="Assign_21">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:Int32">[currentRow]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:Int32">[currentRow + 1]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                  </Sequence>
-                </ActivityAction>
-              </ui:ForEachRow.Body>
-            </ui:ForEachRow>
-            <ui:ExcelSaveWorkbook DisplayName="Save Workbook" sap2010:WorkflowViewState.IdRef="ExcelSaveWorkbook_1" />
+                        </If.Then>
+                        <If.Else>
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_23">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">Нет</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Else>
+                      </If>
+                      <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Status" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_12" SheetName="[sheetName]" Text="[status]" />
+                      <If Condition="[row(4).Equals(True)]" sap2010:WorkflowViewState.IdRef="If_6">
+                        <If.Then>
+                          <ui:ExcelSetRangeColor Color="[System.Drawing.Color.Red]" DisplayName="Set Range Color" sap2010:WorkflowViewState.IdRef="ExcelSetRangeColor_6" Range="[statusCell]" SheetName="[sheetName]" />
+                        </If.Then>
+                        <If.Else>
+                          <ui:ExcelSetRangeColor Color="[System.Drawing.Color.Green]" DisplayName="Set Range Color" sap2010:WorkflowViewState.IdRef="ExcelSetRangeColor_7" Range="[statusCell]" SheetName="[sheetName]" />
+                        </If.Else>
+                      </If>
+                      <Sequence DisplayName="Переносим данные" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_16">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["B" + currentRow.ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Company Name" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_13" SheetName="[sheetName]" Text="[row(0).ToString]" />
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_17">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["C" + currentRow.ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell INN" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_14" SheetName="[sheetName]" Text="[row(1).ToString]" />
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_18">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["D" + currentRow.ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell StartDate" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_15" SheetName="[sheetName]" Text="[row(2).ToString]" />
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_19">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["E" + currentRow.ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell FinishDate" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_16" SheetName="[sheetName]" Text="[row(3).ToString]" />
+                      </Sequence>
+                      <If Condition="[row(4).Equals(True)]" DisplayName="Записываем ссылки" sap2010:WorkflowViewState.IdRef="If_5">
+                        <If.Then>
+                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_15">
+                            <Assign sap2010:WorkflowViewState.IdRef="Assign_20">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[statusCell]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">["F" + currentRow.ToString]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Status" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_17" SheetName="[sheetName]" Text="[row(5).ToString]" />
+                          </Sequence>
+                        </If.Then>
+                      </If>
+                      <Assign sap2010:WorkflowViewState.IdRef="Assign_21">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Int32">[currentRow]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Int32">[currentRow + 1]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEachRow.Body>
+              </ui:ForEachRow>
+              <ui:ExcelSaveWorkbook DisplayName="Save Workbook" sap2010:WorkflowViewState.IdRef="ExcelSaveWorkbook_1" />
+            </Sequence>
           </Sequence>
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
     </ui:ExcelApplicationScope>
     <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start Process" FileName="[destinationFolder + &quot;/&quot; + resultFile]" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="Обработка успешно завершена" TopMost="True" />
-    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sfEoD+QEOAgEBTDRMVgIBBE00TVMCAQNONE49AgECUAVQrQEDAaoBUQVgIAMBnAFhBfUBIAIBC/YBBfYB0gECAQf3AQX3AckBAgEFUCBQJgMBrgFQeFCqAQMBqwFRtgFRyQEDAakBVwtdFgMBnQFhoAFh0gEDAZkBZwvyARYCAQz2AWz2AZ4BAgEI9wGaAfcBtwECAQZbDVvPAQMBpAFcDVznAQMBngFtDXQYAgF6dQ18FgIBdn0N8AEdAgEO8QEN8QF3AgENWz1bTAMBpwFbtQFbuQEDAaYBW8QBW8wBAwGlAVw0XGYDAaEBXHxchQEDAaABXNwBXOQBAwGfAW4PbqABAwGUAW8Pb6sBAwGPAXAPcJ0BAwGKAXEPcagBAwGFAXIPcqwBAwGAAXMPc6EBAgF7ejd6OAIBeXc4d0QCAXd9Pn1LAgF0gwET7QEeAgEPbiduKwMBmAFulQFunQEDAZcBboIBbo8BAwGVAW8nbysDAZMBb5UBb6gBAwGSAW+CAW+PAQMBkAFwJ3ArAwGOAXCVAXCaAQMBjQFwggFwjwEDAYsBcSdxKwMBiQFxlQFxpQEDAYgBcYIBcY8BAwGGAXIncisDAYQBcpYBcqkBAwGDAXKDAXKQAQMBgQFzJ3MrAgF/c5YBc54BAgF+c4MBc5ABAgF8hwEVjgEeAgFvjwEVpgEaAgFlpwEVpwG6AQIBXqgBFa8BGgIBULABFdUBIAIBI9YBFeQBGgIBFeUBFewBHgIBEIwBQIwBWwIBcokBQYkBTQIBcI8BI48BOgIBZpEBGZkBIgIBa5wBGaQBIgIBZ6cBLacBOwIBY6cBrQGnAbcBAgFhpwGaAacBpwECAV+oASOoAToCAVGqARmqAdcBAgFYrQEZrQHZAQIBUrEBF7gBIAIBS7kBF7kBywECAUW6ARfBASACAUDCARfCAcIBAgE6wwEXygEgAgE1ywEXywHIAQIBL8wBF9MBIAIBKtQBF9QByQECASTWASPWAToCARbYARniASQCARfqAT/qAU8CARPnAUDnAUwCARGWAUSWAUYCAW6TAUWTAU0CAWyhAUShAUcCAWqeAUWeAU0CAWiqATaqAVICAV2qAa4BqgG8AQIBW6oBxwGqAdQBAgFZrQE2rQFUAgFXrQGwAa0BvgECAVWtAckBrQHWAQIBU7YBQrYBXQIBTrMBQ7MBTwIBTLkBL7kBPQIBSbkBtQG5AcgBAgFIuQGiAbkBrwECAUa/AUK/AV0CAUO8AUO8AU8CAUHCAS/CAT0CAT7CAawBwgG/AQIBPcIBmQHCAaYBAgE7yAFCyAFdAgE4xQFDxQFPAgE2ywEvywE9AgEzywGyAcsBxQECATLLAZ8BywGsAQIBMNEBQtEBXQIBLc4BQ84BTwIBK9QBL9QBPQIBKNQBswHUAcYBAgEn1AGgAdQBrQECASXZARvgASQCAR7hARvhAckBAgEY3gFG3gFhAgEh2wFH2wFTAgEf4QEz4QFBAgEc4QGzAeEBxgECARvhAaAB4QGtAQIBGQ==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sdUoD6gEOAgEBTDRMVgIBBE00TVMCAQNONE49AgECUAVQrQEDAaIBUQVR3gEDAZ0BUgXmASACAQvnAQXnAdIBAgEH6AEF6AHJAQIBBVAgUCYDAaYBUHhQqgEDAaMBUTlRawMBnwFRyAFR2wEDAZ4BUqABUtIBAwGaAVgL4wEWAgEM5wFs5wGeAQIBCOgBmgHoAbcBAgEGWQ3iARgCAQ1fD2YaAgF7Zw9uGAIBd28P4AEfAgEP4QEP4QF5AgEOYBFgogEDAZUBYRFhrQEDAZABYhFinwEDAYsBYxFjqgEDAYYBZBFkrgEDAYEBZRFlowECAXxsOWw6AgF6aTppRgIBeG9Ab00CAXV1Fd0BIAIBEGApYC0DAZkBYJcBYJ8BAwGYAWCEAWCRAQMBlgFhKWEtAwGUAWGXAWGqAQMBkwFhhAFhkQEDAZEBYiliLQMBjwFilwFinAEDAY4BYoQBYpEBAwGMAWMpYy0DAYoBY5cBY6cBAwGJAWOEAWORAQMBhwFkKWQtAwGFAWSYAWSrAQMBhAFkhQFkkgEDAYIBZSllLQMBgAFlmAFloAECAX9lhQFlkgECAX15F4ABIAIBcIEBF5YBHAIBZpcBF5cBvAECAV+YARefARwCAVGgARfFASICASTGARfUARwCARbVARfcASACARF+Qn5dAgFze0N7TwIBcYEBJYEBPAIBZ4MBG4oBJAIBbI0BG5QBJAIBaJcBL5cBPQIBZJcBrwGXAbkBAgFilwGcAZcBqQECAWCYASWYATwCAVKaARuaAdkBAgFZnQEbnQHbAQIBU6EBGagBIgIBTKkBGakBzQECAUaqARmxASICAUGyARmyAcQBAgE7swEZugEiAgE2uwEZuwHKAQIBMLwBGcMBIgIBK8QBGcQBywECASXGASXGATwCARfIARvSASYCARjaAUHaAVECARTXAULXAU4CARKIAUaIAUgCAW+FAUeFAU8CAW2SAUaSAUkCAWuPAUePAU8CAWmaATiaAVQCAV6aAbABmgG+AQIBXJoByQGaAdYBAgFanQE4nQFWAgFYnQGyAZ0BwAECAVadAcsBnQHYAQIBVKYBRKYBXwIBT6MBRaMBUQIBTakBMakBPwIBSqkBtwGpAcoBAgFJqQGkAakBsQECAUevAUSvAV8CAUSsAUWsAVECAUKyATGyAT8CAT+yAa4BsgHBAQIBPrIBmwGyAagBAgE8uAFEuAFfAgE5tQFFtQFRAgE3uwExuwE/AgE0uwG0AbsBxwECATO7AaEBuwGuAQIBMcEBRMEBXwIBLr4BRb4BUQIBLMQBMcQBPwIBKcQBtQHEAcgBAgEoxAGiAcQBrwECASbJAR3QASYCAR/RAR3RAcsBAgEZzgFIzgFjAgEiywFJywFVAgEg0QE10QFDAgEd0QG1AdEByAECARzRAaIB0QGvAQIBGg==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="Delete_1" sap:VirtualizedContainerService.HintSize="414,22" />
-      <sap2010:ViewStateData Id="ExcelReadRange_1" sap:VirtualizedContainerService.HintSize="314,59" />
-      <sap2010:ViewStateData Id="ExcelCopySheet_2" sap:VirtualizedContainerService.HintSize="314,22" />
-      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="336,245">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelApplicationScope_2" sap:VirtualizedContainerService.HintSize="414,354" />
+      <sap2010:ViewStateData Id="CopyFile_1" sap:VirtualizedContainerService.HintSize="414,22" />
       <sap2010:ViewStateData Id="ExcelWriteCell_6" sap:VirtualizedContainerService.HintSize="314,87" />
       <sap2010:ViewStateData Id="ExcelWriteCell_7" sap:VirtualizedContainerService.HintSize="314,87" />
       <sap2010:ViewStateData Id="ExcelWriteCell_8" sap:VirtualizedContainerService.HintSize="314,87" />
@@ -331,17 +307,24 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,1333" />
-      <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="414,87" />
-      <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="414,59" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,2139">
+      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="380,1348">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="STWriteFile_1" sap:VirtualizedContainerService.HintSize="476,2219" />
+      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,1457" />
+      <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="414,87" />
+      <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="414,59" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,1931">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="STWriteFile_1" sap:VirtualizedContainerService.HintSize="476,2011" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
