@@ -149,7 +149,7 @@
                         </If.Else>
                       </If>
                       <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell Status" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_12" SheetName="[sheetName]" Text="[status]" />
-                      <If Condition="[row(4).Equals(True)]" sap2010:WorkflowViewState.IdRef="If_6">
+                      <If Condition="[row(4).Equals(True)]" DisplayName="Выбираем цвет ячейки статуса" sap2010:WorkflowViewState.IdRef="If_6">
                         <If.Then>
                           <ui:ExcelSetRangeColor Color="[System.Drawing.Color.Red]" DisplayName="Set Range Color" sap2010:WorkflowViewState.IdRef="ExcelSetRangeColor_6" Range="[statusCell]" SheetName="[sheetName]" />
                         </If.Then>
