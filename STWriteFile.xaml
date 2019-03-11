@@ -133,7 +133,7 @@
                               <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
                             </Assign.To>
                             <Assign.Value>
-                              <InArgument x:TypeArguments="x:String">Да</InArgument>
+                              <InArgument x:TypeArguments="x:String">Закупки найдены</InArgument>
                             </Assign.Value>
                           </Assign>
                         </If.Then>
@@ -143,7 +143,7 @@
                               <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
                             </Assign.To>
                             <Assign.Value>
-                              <InArgument x:TypeArguments="x:String">Нет</InArgument>
+                              <InArgument x:TypeArguments="x:String">Закупки не найдены</InArgument>
                             </Assign.Value>
                           </Assign>
                         </If.Else>
@@ -228,9 +228,9 @@
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
     </ui:ExcelApplicationScope>
-    <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start Process" FileName="[destinationFolder + &quot;/&quot; + resultFile]" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
+    <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="iexplore" />
     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="Обработка успешно завершена" TopMost="True" />
-    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sdUoD6gEOAgEBTDRMVgIBBE00TVMCAQNONE49AgECUAVQrQEDAaIBUQVR3gEDAZ0BUgXmASACAQvnAQXnAdIBAgEH6AEF6AHJAQIBBVAgUCYDAaYBUHhQqgEDAaMBUTlRawMBnwFRyAFR2wEDAZ4BUqABUtIBAwGaAVgL4wEWAgEM5wFs5wGeAQIBCOgBmgHoAbcBAgEGWQ3iARgCAQ1fD2YaAgF7Zw9uGAIBd28P4AEfAgEP4QEP4QF5AgEOYBFgogEDAZUBYRFhrQEDAZABYhFinwEDAYsBYxFjqgEDAYYBZBFkrgEDAYEBZRFlowECAXxsOWw6AgF6aTppRgIBeG9Ab00CAXV1Fd0BIAIBEGApYC0DAZkBYJcBYJ8BAwGYAWCEAWCRAQMBlgFhKWEtAwGUAWGXAWGqAQMBkwFhhAFhkQEDAZEBYiliLQMBjwFilwFinAEDAY4BYoQBYpEBAwGMAWMpYy0DAYoBY5cBY6cBAwGJAWOEAWORAQMBhwFkKWQtAwGFAWSYAWSrAQMBhAFkhQFkkgEDAYIBZSllLQMBgAFlmAFloAECAX9lhQFlkgECAX15F4ABIAIBcIEBF5YBHAIBZpcBF5cBvAECAV+YARefARwCAVGgARfFASICASTGARfUARwCARbVARfcASACARF+Qn5dAgFze0N7TwIBcYEBJYEBPAIBZ4MBG4oBJAIBbI0BG5QBJAIBaJcBL5cBPQIBZJcBrwGXAbkBAgFilwGcAZcBqQECAWCYASWYATwCAVKaARuaAdkBAgFZnQEbnQHbAQIBU6EBGagBIgIBTKkBGakBzQECAUaqARmxASICAUGyARmyAcQBAgE7swEZugEiAgE2uwEZuwHKAQIBMLwBGcMBIgIBK8QBGcQBywECASXGASXGATwCARfIARvSASYCARjaAUHaAVECARTXAULXAU4CARKIAUaIAUgCAW+FAUeFAU8CAW2SAUaSAUkCAWuPAUePAU8CAWmaATiaAVQCAV6aAbABmgG+AQIBXJoByQGaAdYBAgFanQE4nQFWAgFYnQGyAZ0BwAECAVadAcsBnQHYAQIBVKYBRKYBXwIBT6MBRaMBUQIBTakBMakBPwIBSqkBtwGpAcoBAgFJqQGkAakBsQECAUevAUSvAV8CAUSsAUWsAVECAUKyATGyAT8CAT+yAa4BsgHBAQIBPrIBmwGyAagBAgE8uAFEuAFfAgE5tQFFtQFRAgE3uwExuwE/AgE0uwG0AbsBxwECATO7AaEBuwGuAQIBMcEBRMEBXwIBLr4BRb4BUQIBLMQBMcQBPwIBKcQBtQHEAcgBAgEoxAGiAcQBrwECASbJAR3QASYCAR/RAR3RAcsBAgEZzgFIzgFjAgEiywFJywFVAgEg0QE10QFDAgEd0QG1AdEByAECARzRAaIB0QGvAQIBGg==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzpcXG1hY1xIb21lXERvY3VtZW50c1xVaVBhdGhcUFdDLVB1cmNoYXNlc1xTVFdyaXRlRmlsZS54YW1sdUoD6gEOAgEBTDRMVgIBBE00TVMCAQNONE49AgECUAVQrQEDAaABUQVR3gEDAZsBUgXmASACAQnnAQXnAacBAgEH6AEF6AHJAQIBBVAgUCYDAaQBUHhQqgEDAaEBUTlRawMBnQFRyAFR2wEDAZwBUqABUtIBAwGYAVgL4wEWAgEK5wGaAecBpAECAQjoAZoB6AG3AQIBBlkN4gEYAgELXw9mGgIBeWcPbhgCAXVvD+ABHwIBDeEBD+EBeQIBDGARYKIBAwGTAWERYa0BAwGOAWIRYp8BAwGJAWMRY6oBAwGEAWQRZK4BAgF/ZRFlowECAXpsOWw6AgF4aTppRgIBdm9Ab00CAXN1Fd0BIAIBDmApYC0DAZcBYJcBYJ8BAwGWAWCEAWCRAQMBlAFhKWEtAwGSAWGXAWGqAQMBkQFhhAFhkQEDAY8BYiliLQMBjQFilwFinAEDAYwBYoQBYpEBAwGKAWMpYy0DAYgBY5cBY6cBAwGHAWOEAWORAQMBhQFkKWQtAwGDAWSYAWSrAQMBggFkhQFkkgEDAYABZSllLQIBfmWYAWWgAQIBfWWFAWWSAQIBe3kXgAEgAgFugQEXlgEcAgFklwEXlwG8AQIBXZgBF58BHAIBT6ABF8UBIgIBIsYBF9QBHAIBFNUBF9wBIAIBD35Cfl0CAXF7Q3tPAgFvgQElgQE8AgFlgwEbigEkAgFqjQEblAEkAgFmlwEvlwE9AgFilwGvAZcBuQECAWCXAZwBlwGpAQIBXpgBJZgBPAIBUJoBG5oB2QECAVedARudAdsBAgFRoQEZqAEiAgFKqQEZqQHNAQIBRKoBGbEBIgIBP7IBGbIBxAECATmzARm6ASICATS7ARm7AcoBAgEuvAEZwwEiAgEpxAEZxAHLAQIBI8YBJcYBPAIBFcgBG9IBJgIBFtoBQdoBUQIBEtcBQtcBTgIBEIgBRogBVQIBbYUBR4UBTwIBa5IBRpIBWAIBaY8BR48BTwIBZ5oBOJoBVAIBXJoBsAGaAb4BAgFamgHJAZoB1gECAVidATidAVYCAVadAbIBnQHAAQIBVJ0BywGdAdgBAgFSpgFEpgFfAgFNowFFowFRAgFLqQExqQE/AgFIqQG3AakBygECAUepAaQBqQGxAQIBRa8BRK8BXwIBQqwBRawBUQIBQLIBMbIBPwIBPbIBrgGyAcEBAgE8sgGbAbIBqAECATq4AUS4AV8CATe1AUW1AVECATW7ATG7AT8CATK7AbQBuwHHAQIBMbsBoQG7Aa4BAgEvwQFEwQFfAgEsvgFFvgFRAgEqxAExxAE/AgEnxAG1AcQByAECASbEAaIBxAGvAQIBJMkBHdABJgIBHdEBHdEBywECARfOAUjOAWMCASDLAUnLAVUCAR7RATXRAUMCARvRAbUB0QHIAQIBGtEBogHRAa8BAgEY</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -291,7 +291,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEachRow_2" sap:VirtualizedContainerService.HintSize="577.5,2593">
+      <sap2010:ViewStateData Id="ForEachRow_2" sap:VirtualizedContainerService.HintSize="336,52">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -315,16 +315,16 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,1457" />
-      <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="414,87" />
+      <sap2010:ViewStateData Id="KillProcess_1" sap:VirtualizedContainerService.HintSize="414,22" />
       <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="414,59" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,1931">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,1866">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="STWriteFile_1" sap:VirtualizedContainerService.HintSize="476,2011" />
+      <sap2010:ViewStateData Id="STWriteFile_1" sap:VirtualizedContainerService.HintSize="476,2073" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
